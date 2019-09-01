@@ -1,0 +1,20 @@
+<div *ngFor="let song of songs">
+
+  <div>{{song.title}}</div>
+
+  <div>{{song.url}}</div>
+
+  <div *ngFor="let lyric of song.lyrics">
+
+    <div>{{lyric.getLang()}}</div>
+
+    <div *ngFor="let sentence of lyric.lyric">
+
+      <div>{{sentence}}</div>
+
+    </div>
+
+  </div>
+
+</div>
+
