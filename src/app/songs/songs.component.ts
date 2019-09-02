@@ -35,7 +35,6 @@ export class SongsComponent implements OnInit {
   public displayMultipleLang(song: Song){
 
 
-
   }
 
 

@@ -5,12 +5,12 @@ import {Lyric} from "./lyric";
 export class Song {
 
   @JsonProperty("title", String)
-  public title: string = null;
+  private title: String = null;
 
   @JsonProperty("url", String)
-  public url: string = null;
+  public url: String = null;
 
   @JsonProperty("lyrics", [Lyric])
-  public lyrics: Lyric[] = [];
+  public lyrics: Lyric[] = null;
 
 }
