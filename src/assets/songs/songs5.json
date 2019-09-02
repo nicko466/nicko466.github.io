@@ -4,7 +4,7 @@
   "lyrics": [
     {
       "lang": "cn",
-      "lyric": [
+      "sentences": [
         "作词 :法老/戴斯蒙德",
         "编曲 chef D",
         "录音/混音 杨秋儒",
@@ -95,7 +95,7 @@
     },
     {
       "lang": "py",
-      "lyric": [
+      "sentences": [
         "zuò cí   : fǎ lǎo / dài sī mēng dé",
         "biān qū   chef   D",
         "lù yīn / hùn yīn   yáng qiū rú",
@@ -186,7 +186,7 @@
     },
     {
       "lang": "en",
-      "lyric": [
+      "sentences": [
         "Word: Pharaoh / Desmond",
         "Arranged chef D",
         "Recording / Remixing Yang Qiuru",

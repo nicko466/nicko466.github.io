@@ -21,14 +21,22 @@ export class SongsComponent implements OnInit {
       .getJSON()
       .subscribe(
         (data: any) => {
-          console.log(data);
           let jsonConvert: JsonConvert = new JsonConvert();
           let song: Song = jsonConvert.deserializeObject(data, Song);
+          console.log(song);
           this.songs.push(song);
         },
         (error) => console.error(`Failed to get data due to ${error} `)
       );
 
   }
+
+
+  public displayMultipleLang(song: Song){
+
+
+
+  }
+
 
 }
