@@ -11,6 +11,6 @@ export class Song {
   public url: string = null;
 
   @JsonProperty("lyrics", [Lyric])
-  public lyrics: Lyric[] = [];
+  public lyrics: Lyric[] = null;
 
 }
