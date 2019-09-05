@@ -7,7 +7,7 @@ export class Lyric {
   private _lang: Lang = null;
 
   @JsonProperty("sentences", [String])
-  public sentences: String[] = [];
+  public sentences: string[] = [];
 
   public getLang(): Lang{
     return this._lang;

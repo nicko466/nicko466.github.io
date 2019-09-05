@@ -1,16 +1,18 @@
-<div *ngFor="let song of songs">
+<div *ngIf="song != null">
 
-  <div>{{song.title}}</div>
+  <div>{{title}}</div>
 
-  <div>{{song.url}}</div>
+  <div>{{url}}</div>
 
-  <div *ngFor="let lyric of song.lyrics">
+  <div *ngFor="let lyric of song.lyrics; let langIndex = index">
 
-    <div>{{lyric.getLang()}}</div>
+    <!--<div>{{// lyric.getLang()}} </div>-->
 
-    <div *ngFor="let sentence of lyric.sentences">
+    <div *ngFor="let sentence of lyric.sentences; let sentenceIndex = index">
 
-      <div>{{sentence}}</div>
+      <div>{{sentences[0][sentenceIndex]}}</div>
+      <div>{{sentences[1][sentenceIndex]}}</div>
+      <div>{{sentences[2][sentenceIndex]}}</div>
 
     </div>
 
