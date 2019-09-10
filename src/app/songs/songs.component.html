@@ -1,22 +1,57 @@
-<div *ngIf="song != null">
+<div *ngIf="apiSong != null">
 
   <div>{{title}}</div>
 
   <div>{{url}}</div>
 
-  <div *ngFor="let lyric of song.lyrics; let langIndex = index">
 
-    <!--<div>{{// lyric.getLang()}} </div>-->
+  <table class="table">
+    <caption>{{title}} {{url}}</caption>
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
 
-    <div *ngFor="let sentence of lyric.sentences; let sentenceIndex = index">
+    <span *ngFor="let lyric of song.lyrics">
 
-      <div>{{sentences[0][sentenceIndex]}}</div>
-      <div>{{sentences[1][sentenceIndex]}}</div>
-      <div>{{sentences[2][sentenceIndex]}}</div>
+      <tr *ngFor="let lyricLang of lyric.lyricLang">
 
-    </div>
+        <td *ngFor="let sentence of lyricLang.sentences" scope="row">
 
-  </div>
+          <span>{{sentence}} </span>
+
+        </td>
+
+      </tr>
+
+    </span>
+
+    <!--<tr>-->
+    <!--<th scope="row">1</th>-->
+    <!--<td>Mark</td>-->
+    <!--<td>Otto</td>-->
+    <!--<td>@mdo</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<th scope="row">2</th>-->
+    <!--<td>Jacob</td>-->
+    <!--<td>Thornton</td>-->
+    <!--<td>@fat</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<th scope="row">3</th>-->
+    <!--<td>Larry</td>-->
+    <!--<td>the Bird</td>-->
+    <!--<td>@twitter</td>-->
+    <!--</tr>-->
+    </tbody>
+  </table>
+
 
 </div>
 

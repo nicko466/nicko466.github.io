@@ -1,4 +1,4 @@
-enum Lang {
+enum ApiLang {
   Fr,
   En,
   Cn

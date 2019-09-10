@@ -1,30 +1,12 @@
-import {JsonObject, JsonProperty} from "json2typescript";
+import {LyricLang} from "./lyricLang";
+import {ApiSong} from "./apiSong";
 
-@JsonObject("Lyric")
 export class Lyric {
 
-  @JsonProperty("lang", String)
-  private _lang: Lang = null;
+  public lyricLang: LyricLang[] = []
 
-  @JsonProperty("sentences", [String])
-  public sentences: string[] = [];
-
-  public getLang(): Lang{
-    return this._lang;
-  }
-
-  public setLang(lang: string){
-    switch (lang) {
-      case "fr":
-        this._lang = Lang.Fr;
-        break;
-      case "en":
-        this._lang = Lang.En;
-        break;
-      case "cn":
-        this._lang = Lang.Cn;
-        break;
-    }
+  constructor(lang: ApiLang, sentence: string){
+    this.lyricLang.push(new LyricLang(lang, sentence))
   }
 
 }

@@ -1,7 +1,6 @@
-import {JsonObject, JsonProperty} from "json2typescript";
 
 export class Sentence {
 
-  private text: string;
+  private word: string[];
 
 }

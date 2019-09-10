@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Song} from "../../models/song";
+import {ApiSong} from "../../models/apiSong";
 import {SongService} from "../../services/song.service";
 import {JsonConvert} from "json2typescript";
+import {Song} from "../../models/song";
 
 @Component({
   selector: 'app-songs',
@@ -10,6 +11,7 @@ import {JsonConvert} from "json2typescript";
 })
 export class SongsComponent implements OnInit {
 
+  public apiSong: ApiSong;
   public song: Song;
 
   public sentences: String[][];
@@ -30,31 +32,29 @@ export class SongsComponent implements OnInit {
       .subscribe(
         (data: any) => {
           let jsonConvert: JsonConvert = new JsonConvert();
-          this.song = jsonConvert.deserializeObject(data, Song);
-          // this.displayMultipleLang(song);
-          this.url = this.song.url;
-          this.title = this.song.title;
-          this.sentences = this.getSentences(this.song);
-          this.numberOfLang = this.getNumberOfLang(this.song);
-          this.numberOfSentences = this.getNumberOfSentences(this.song);
-          console.log(this.sentences);
-          console.log(this.sentences[0][0]);
-          console.log(this.sentences[1][0]);
-          console.log(this.sentences[2][0]);
-          console.log(this.sentences[0][1]);
-          console.log(this.sentences[1][2]);
+          this.apiSong = jsonConvert.deserializeObject(data, ApiSong);
+          this.song = new Song(this.apiSong);
+
+          console.log("test" + this.song);
+
+          // this.displayMultipleLang(apiSong);
+          this.url = this.apiSong.url;
+          this.title = this.apiSong.title;
+          this.sentences = this.getSentences(this.apiSong);
+          this.numberOfLang = this.getNumberOfLang(this.apiSong);
+          this.numberOfSentences = this.getNumberOfSentences(this.apiSong);
         },
         (error) => console.error(`Failed to get data due to ${error} `)
       );
 
   }
 
-  public getSentences(song: Song): String[][] {
+  public getSentences(song: ApiSong): String[][] {
     return song.lyrics
       .map((value) => value.sentences);
   }
 
-  public getNumberOfLang(song: Song): number {
+  public getNumberOfLang(song: ApiSong): number {
     let lyrics: string[][] = song.lyrics
       .map((value) => value.sentences);
 
@@ -65,7 +65,7 @@ export class SongsComponent implements OnInit {
     return 0;
   }
 
-  public getNumberOfSentences(song: Song): number {
+  public getNumberOfSentences(song: ApiSong): number {
     let lyrics: string[][] = song.lyrics
       .map((value) => value.sentences);
 
@@ -80,8 +80,8 @@ export class SongsComponent implements OnInit {
   }
 
 
-  // public displayMultipleLang(song: Song): string[] {
-  //   let lyrics: string[][] = song.lyrics
+  // public displayMultipleLang(apiSong: Song): string[] {
+  //   let lyrics: string[][] = apiSong.lyrics
   //     .map((value) => value.sentences);
   //
   //   let result: string[] = [];
