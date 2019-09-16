@@ -1,0 +1,27 @@
+<div *ngIf="apiSong != null">
+
+  <div>{{title}}</div>
+
+  <div>{{url}}</div>
+
+  <div class="">
+
+    <div *ngFor="let lyric of song.lyrics" class="lyric container-fluid">
+
+      <div *ngFor="let lyricLang of lyric" class="lyric__lang row justify-content-around">
+
+        <div *ngFor="let word of lyricLang.words" class="lyric__lang__word col text-center">
+
+            {{word}}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
