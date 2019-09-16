@@ -7,7 +7,7 @@ export class Song {
 
   public url: string = null;
 
-  public lyrics: Lyric[] = [];
+  public lyrics: Lyric[][] = [];
 
   constructor(apiSong: ApiSong){
     this.url = apiSong.url;
@@ -16,7 +16,7 @@ export class Song {
     this.lyrics = this.getLyrics(apiSong);
   }
 
-  public getLyrics(apiSong: ApiSong): Lyric[] {
+  public getLyrics(apiSong: ApiSong): Lyric[][] {
     let lyrics: string[][] = apiSong.lyrics
       .map((value) => value.sentences);
 
