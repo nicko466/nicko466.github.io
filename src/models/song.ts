@@ -20,7 +20,7 @@ export class Song {
     let lyrics: string[][] = apiSong.lyrics
       .map((value) => value.sentences);
 
-    let result: Lyric[] = [];
+    let result: Lyric[][] = [];
     let numberOflang: number = 0;
     let numberOfSentences: number = 0;
     if (Array.isArray(lyrics) && lyrics.length > 0) {
@@ -33,10 +33,14 @@ export class Song {
 
     for (let indexSentence = 0; indexSentence < numberOfSentences; indexSentence++) {
 
+        result[indexSentence] = [];
+
         for (let indexLang = 0; indexLang < numberOflang; indexLang++) {
 
-          result.push(new Lyric(apiSong.lyrics[indexLang].getLang(), apiSong.lyrics[indexLang].sentences[indexSentence]))
-        }
+          result[indexSentence].push(
+            new Lyric(apiSong.lyrics[indexLang].getLang(), apiSong.lyrics[indexLang].sentences[indexSentence]
+            )
+        )}
 
     }
 

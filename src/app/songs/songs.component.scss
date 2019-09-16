@@ -1,0 +1,16 @@
+.lyric {
+
+  margin-top: 25px;
+  width: fit-content;
+  margin-left: 0px;
+
+  &__lang {
+     background-color: azure;
+
+    &__word {
+      margin: 5px;
+    }
+
+  }
+
+}

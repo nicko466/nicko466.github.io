@@ -35,7 +35,7 @@ export class SongsComponent implements OnInit {
           this.apiSong = jsonConvert.deserializeObject(data, ApiSong);
           this.song = new Song(this.apiSong);
 
-          console.log("test" + this.song);
+          console.log(this.song);
 
           // this.displayMultipleLang(apiSong);
           this.url = this.apiSong.url;

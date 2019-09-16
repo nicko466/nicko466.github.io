@@ -4,53 +4,23 @@
 
   <div>{{url}}</div>
 
+  <div class="">
 
-  <table class="table">
-    <caption>{{title}} {{url}}</caption>
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-    </thead>
-    <tbody>
+    <div *ngFor="let lyric of song.lyrics" class="lyric container-fluid">
 
-    <span *ngFor="let lyric of song.lyrics">
+      <div *ngFor="let lyricLang of lyric" class="lyric__lang row justify-content-around">
 
-      <tr *ngFor="let lyricLang of lyric.lyricLang">
+        <div *ngFor="let word of lyricLang.words" class="lyric__lang__word col text-center">
 
-        <td *ngFor="let sentence of lyricLang.sentences" scope="row">
+            {{word}}
 
-          <span>{{sentence}} </span>
+        </div>
 
-        </td>
+      </div>
 
-      </tr>
+    </div>
 
-    </span>
-
-    <!--<tr>-->
-    <!--<th scope="row">1</th>-->
-    <!--<td>Mark</td>-->
-    <!--<td>Otto</td>-->
-    <!--<td>@mdo</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<th scope="row">2</th>-->
-    <!--<td>Jacob</td>-->
-    <!--<td>Thornton</td>-->
-    <!--<td>@fat</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<th scope="row">3</th>-->
-    <!--<td>Larry</td>-->
-    <!--<td>the Bird</td>-->
-    <!--<td>@twitter</td>-->
-    <!--</tr>-->
-    </tbody>
-  </table>
+  </div>
 
 
 </div>
