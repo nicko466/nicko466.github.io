@@ -9,7 +9,13 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+  <!-- Dirty fix to manage correct url on github -->
+  <script>
+    var homeRoute = '/home';
+    if (!location.href.endsWith(homeRoute)){
+      window.location.replace(homeRoute)
+    }
+  </script>
 </head>
 <body>
 <app-root></app-root>
