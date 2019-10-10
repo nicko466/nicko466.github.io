@@ -13,8 +13,7 @@
   <script>
     var homeRoute = '/home';
     if (!location.href.endsWith(homeRoute)){
-      window.location.reload();
-      window.location.replace(homeRoute)
+      window.location.pathname = homeRoute
     }
   </script>
 </head>
