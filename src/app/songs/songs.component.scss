@@ -1,16 +1,29 @@
-.lyric {
 
-  margin-top: 25px;
-  width: fit-content;
-  margin-left: 0px;
+.songs {
 
-  &__lang {
-    background-color: azure;
+  text-align: center;
 
-    &__word {
-      margin: 5px;
+  .lyric {
+
+    margin-top: 25px;
+    width: fit-content;
+  
+    &__lang {
+      background-color: azure;
+  
+      &__word {
+        margin: 5px;
+      }
     }
+  }
 
+}
+
+@media (max-width: 576px) { 
+
+  .row
+  .col {
+    padding: 0px !important;
   }
 
 }

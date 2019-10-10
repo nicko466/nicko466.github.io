@@ -1,10 +1,10 @@
-<div *ngIf="apiSong != null">
+<div *ngIf="apiSong != null" class="songs">
 
   <div>{{title}}</div>
 
   <a [href]="url">{{url}}</a>
 
-  <div class="">
+  <div>
 
     <div *ngFor="let lyricLangs of song.lyrics" class="lyric container-fluid">
 
