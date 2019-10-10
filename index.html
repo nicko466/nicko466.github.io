@@ -12,8 +12,10 @@
   <!-- Dirty fix to manage correct url on github -->
   <script>
     var homeRoute = '/home';
+    console.log(location.href)
     if (!location.href.endsWith(homeRoute)){
       window.location.pathname = homeRoute
+      console.log(location.href)
     }
   </script>
 </head>
