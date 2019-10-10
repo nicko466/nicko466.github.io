@@ -37,7 +37,6 @@ export class SongsComponent implements OnInit {
 
           console.log(this.song);
 
-          // this.displayMultipleLang(apiSong);
           this.url = this.apiSong.url;
           this.title = this.apiSong.title;
           this.sentences = this.getSentences(this.apiSong);
@@ -78,34 +77,5 @@ export class SongsComponent implements OnInit {
 
     return 0;
   }
-
-
-  // public displayMultipleLang(apiSong: Song): string[] {
-  //   let lyrics: string[][] = apiSong.lyrics
-  //     .map((value) => value.sentences);
-  //
-  //   let result: string[] = [];
-  //   let numberOflang: number = 0;
-  //   let numberOfSentences: string[] = [];
-  //   if (Array.isArray(lyrics) && lyrics.length > 0) {
-  //     numberOflang = lyrics.length;
-  //
-  //     if (Array.isArray(lyrics[0]) && lyrics[0].length > 0) {
-  //       numberOfSentences = lyrics[0].length;
-  //     }
-  //   }
-  //
-  //   for (var indexSentence = 0; indexSentence < numberOfSentences; indexSentence++) {
-  //
-  //     for (var indexLang = 0; indexLang < numberOflang; indexLang++) {
-  //
-  //       result.push(lyrics[indexLang][indexSentence]);
-  //     }
-  //
-  //   }
-  //
-  //   return result;
-  // }
-
 
 }

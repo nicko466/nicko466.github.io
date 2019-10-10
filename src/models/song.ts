@@ -12,7 +12,6 @@ export class Song {
   constructor(apiSong: ApiSong){
     this.url = apiSong.url;
     this.title = apiSong.title;
-
     this.lyrics = this.getLyrics(apiSong);
   }
 
