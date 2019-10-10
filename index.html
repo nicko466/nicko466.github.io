@@ -9,15 +9,6 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- Dirty fix to manage correct url on github -->
-  <script>
-    var homeRoute = '/home';
-    console.log(location.href)
-    if (!location.href.endsWith(homeRoute) || !location.href.endsWith(homeRoute + '/')) {
-      window.location.pathname = homeRoute
-      console.log(location.href)
-    }
-  </script>
 </head>
 <body>
 <app-root></app-root>
