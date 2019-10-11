@@ -9,6 +9,9 @@ export class ApiLyric {
   @JsonProperty("sentences", [String])
   public sentences: string[] = [];
 
+  @JsonProperty("phonetic", [String])
+  public phonetic: string[] = [];
+
   public getLang(): ApiLang{
     return this._lang;
   }

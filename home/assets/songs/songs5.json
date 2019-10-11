@@ -91,11 +91,8 @@
         "周,而,复,始,跳,着,丑,陋,舞,蹈",
         "收,入,不,高,而,且,脾,气,不,好",
         "出,品,公,司,A,F,S,C,M,U,S,I,C,"
-      ]
-    },
-    {
-      "lang": "py",
-      "sentences": [
+      ],
+      "phonetic": [
         "zuò,cí,:,fǎ,lǎo,/,dài,sī,mēng,dé",
         "biān,qū,chef,D",
         "lù,yīn,/,hùn,yīn,yáng,qiū,rú",
@@ -187,7 +184,7 @@
     {
       "lang": "en",
       "sentences": [
-        "Word:,Pharaoh,/,Desmond",
+        "Word,:,Pharaoh,/,Desmond",
         "Arranged,chef,D",
         "Recording,/,Remixing,Yang,Qiuru",
         "Master,Band,Yang,Qiuru",
@@ -273,7 +270,8 @@
         "Weekly,dances,ugly,dance",
         "The,income,is,not,high,and,the,temper,is,not,good",
         "Production,company,AFSC,MUSIC"
-      ]
+      ],
+      "phonetic": []
     }
   ]
 }

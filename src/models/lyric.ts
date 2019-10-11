@@ -4,11 +4,12 @@ export class Lyric {
 
   public words: string[] = [];
 
-  constructor(lang, sentences) {
+  public phoneWords: string[] = [];
+
+  constructor(lang, sentences, phoneWords) {
     this.lang = lang;
-    this.words = sentences
-      .replace(/\s/g, "")
-      .split(",");
+    this.words = this.extractWords(sentences);
+    this.phoneWords = this.extractWords(phoneWords);
   }
 
   public getLang(): ApiLang{
@@ -27,6 +28,13 @@ export class Lyric {
         this.lang = ApiLang.Cn;
         break;
     }
+  }
+
+  private extractWords(sentence: string): string[]{
+    return sentence != null ? 
+    sentence
+    .replace(/\s/g, "")
+    .split(",") : [];
   }
 
 }

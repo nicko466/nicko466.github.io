@@ -1,5 +1,6 @@
 import {Lyric} from "./lyric";
 import {ApiSong} from "./apiSong";
+import { BrowserStack } from 'protractor/built/driverProviders';
 
 export class Song {
 
@@ -37,9 +38,14 @@ export class Song {
         for (let indexLang = 0; indexLang < numberOflang; indexLang++) {
 
           result[indexSentence].push(
-            new Lyric(apiSong.lyrics[indexLang].getLang(), apiSong.lyrics[indexLang].sentences[indexSentence]
+            new Lyric(
+              apiSong.lyrics[indexLang].getLang(),
+              apiSong.lyrics[indexLang].sentences[indexSentence],
+              apiSong.lyrics[indexLang].phonetic[indexSentence]
             )
-        )}
+          )
+
+      }
 
     }
 
