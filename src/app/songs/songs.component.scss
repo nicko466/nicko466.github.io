@@ -1,6 +1,7 @@
 
 .songs {
 
+  background-color: #EBE9E7;
   text-align: center;
 
   .lyric {
@@ -9,11 +10,19 @@
     width: fit-content;
   
     &__lang {
-      background-color: azure;
-  
+
+      &--cn {
+        color: #2E5266;
+      }
+
+      &--en {
+        color: #62799E;
+      }
+
       &__word {
         margin: 5px;
 
+       
         &__phonetic {
           margin-top: 5px;
         }

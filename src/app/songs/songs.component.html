@@ -8,13 +8,18 @@
 
     <div *ngFor="let lyricLangs of song.lyrics" class="lyric container-fluid">
 
-      <div *ngFor="let lyricLang of lyricLangs" class="lyric__lang row justify-content-around">
+      <div *ngFor="let lyricLang of lyricLangs" class="lyric__lang row justify-content-around"
+        [ngClass]="'lyric__lang--' + lyricLang.lang"      
+      >
 
-        <div *ngFor="let word of lyricLang.words; let wordPos = index" class="lyric__lang__word col text-center">
+        <div *ngFor="let word of lyricLang.words; let wordPos = index" class="lyric__lang__word col text-center"
+        >
 
             {{word}}
 
-            <div *ngIf="lyricLang.phoneWords[wordPos] != null" class="lyric__lang__word__phonetic">
+            <div *ngIf="lyricLang.phoneWords[wordPos] != null" 
+            class="lyric__lang__word__phonetic"
+            [ngClass]="'lyric__lang__word--' + lyricLang.lang">
               {{lyricLang.phoneWords[wordPos]}}
             </div>
 
