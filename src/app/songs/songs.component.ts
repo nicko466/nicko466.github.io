@@ -11,15 +11,8 @@ import {Song} from "../../models/song";
 })
 export class SongsComponent implements OnInit {
 
-  public apiSong: ApiSong;
   public song: Song;
-
-  public sentences: String[][];
-  public url: string;
-  public title: string;
-
-  public numberOfLang: number = 0;
-  public numberOfSentences: number = 0;
+  public langsIsDisplayed: Map<ApiLang, boolean> = new Map<ApiLang, boolean>();
 
   constructor(
     private songservice: SongService,
@@ -32,20 +25,24 @@ export class SongsComponent implements OnInit {
       .subscribe(
         (data: any) => {
           let jsonConvert: JsonConvert = new JsonConvert();
-          this.apiSong = jsonConvert.deserializeObject(data, ApiSong);
-          this.song = new Song(this.apiSong);
+          let apiSong: ApiSong = jsonConvert.deserializeObject(data, ApiSong);
+          this.song = new Song(apiSong);
 
-          console.log(this.song);
+          this.song.langs.forEach(element => {
+            this.langsIsDisplayed.set(element, true);
+          });
 
-          this.url = this.apiSong.url;
-          this.title = this.apiSong.title;
-          this.sentences = this.getSentences(this.apiSong);
-          this.numberOfLang = this.getNumberOfLang(this.apiSong);
-          this.numberOfSentences = this.getNumberOfSentences(this.apiSong);
+          // this.sentences = this.getSentences(this.apiSong);
+          // this.numberOfLang = this.getNumberOfLang(this.apiSong);
+          // this.numberOfSentences = this.getNumberOfSentences(this.apiSong);
         },
         (error) => console.error(`Failed to get data due to ${error} `)
       );
 
+  }
+
+  public updateLangToDisplay(lang: ApiLang){
+    this.langsIsDisplayed.set(lang, !this.langsIsDisplayed.get(lang));
   }
 
   public getSentences(song: ApiSong): String[][] {

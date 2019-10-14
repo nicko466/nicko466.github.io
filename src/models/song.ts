@@ -10,6 +10,8 @@ export class Song {
 
   public lyrics: Lyric[][] = [];
 
+  public langs: Set<ApiLang> = new Set();
+
   constructor(apiSong: ApiSong){
     this.url = apiSong.url;
     this.title = apiSong.title;
@@ -37,9 +39,13 @@ export class Song {
 
         for (let indexLang = 0; indexLang < numberOflang; indexLang++) {
 
+          let apiLang: ApiLang = apiSong.lyrics[indexLang].getLang();
+
+          this.langs.add(apiLang);
+
           result[indexSentence].push(
             new Lyric(
-              apiSong.lyrics[indexLang].getLang(),
+              apiLang,
               apiSong.lyrics[indexLang].sentences[indexSentence],
               apiSong.lyrics[indexLang].phonetic[indexSentence]
             )

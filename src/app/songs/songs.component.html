@@ -1,8 +1,17 @@
-<div *ngIf="apiSong != null" class="songs">
+<div *ngIf="song != null" class="song">
 
-  <div>{{title}}</div>
+  <a [href]="song.url">{{song.title}}</a>
 
-  <a [href]="url">{{url}}</a>
+  <div class="song__langs">
+      <ul class="list-group list-group-horizontal">
+          <li *ngFor="let lang of song.langs" type="button" class="list-group-item list-group-item-action"
+            [ngClass]="langsIsDisplayed.get(lang) ? 'active' : ''"
+            (click)="updateLangToDisplay(lang)"
+          >
+            {{lang}}
+        </li>
+      </ul>
+  </div>
 
   <div>
 
@@ -11,21 +20,24 @@
       <div *ngFor="let lyricLang of lyricLangs" class="lyric__lang row justify-content-around"
         [ngClass]="'lyric__lang--' + lyricLang.lang">
 
-        <div *ngFor="let word of lyricLang.words; let wordPos = index" class="lyric__lang__word col text-center">
+        <div *ngIf="langsIsDisplayed.get(lyricLang.lang)" class="lyric__lang__container">
 
-          {{word}}
+            <div *ngFor="let word of lyricLang.words; let wordPos = index" class="lyric__lang__container__word col text-center">
 
-          <div *ngIf="lyricLang.phoneWords[wordPos] != null" class="lyric__lang__word__phonetic">
-            {{lyricLang.phoneWords[wordPos]}}
-          </div>
+              {{word}}
+      
+              <div *ngIf="lyricLang.phoneWords[wordPos] != null" class="lyric__lang__container__word__phonetic">
+                {{lyricLang.phoneWords[wordPos]}}
+              </div>
+      
+            </div>
 
         </div>
-
+        
       </div>
 
     </div>
 
   </div>
-
 
 </div>
