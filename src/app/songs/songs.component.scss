@@ -6,6 +6,10 @@
   margin-right: 15px;
 
   &__langs {
+
+    div {
+      margin-top: 15px;
+    }
     
     ul {
       display: inline-flex;
@@ -30,6 +34,7 @@
 
       &__container {
         display: inline-flex;
+        flex-wrap: wrap;
       }
 
       &--cn {

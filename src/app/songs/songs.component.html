@@ -3,6 +3,7 @@
   <a [href]="song.url">{{song.title}}</a>
 
   <div class="song__langs">
+      <div>Choose your language : </div>
       <ul class="list-group list-group-horizontal">
           <li *ngFor="let lang of song.langs" type="button" class="list-group-item list-group-item-action"
             [ngClass]="langsIsDisplayed.get(lang) ? 'active' : ''"
