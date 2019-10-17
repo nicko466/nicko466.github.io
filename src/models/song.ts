@@ -8,6 +8,8 @@ export class Song {
 
   public url: string = null;
 
+  public cover: string = null;
+
   public lyrics: Lyric[][] = [];
 
   public langs: Set<ApiLang> = new Set();
@@ -15,6 +17,7 @@ export class Song {
   constructor(apiSong: ApiSong){
     this.url = apiSong.url;
     this.title = apiSong.title;
+    this.cover = apiSong.cover;
     this.lyrics = this.getLyrics(apiSong);
   }
 

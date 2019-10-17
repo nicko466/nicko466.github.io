@@ -1,6 +1,11 @@
 <div *ngIf="song != null" class="song">
 
+  <img [src]="song.cover"/>
+
+<div>
   <a [href]="song.url">{{song.title}}</a>
+</div>
+
 
   <div class="song__langs">
       <div>Choose your language : </div>
