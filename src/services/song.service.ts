@@ -7,8 +7,8 @@ export class SongService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getJSON(): Observable<any> {
-    return this.httpClient.get("./assets/songs/songs5.json");
+  public getJSON(element: string): Observable<any> {
+    return this.httpClient.get(`./assets/songs/${element}.json`);
   }
 
 

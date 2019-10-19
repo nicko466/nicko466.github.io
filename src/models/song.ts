@@ -1,5 +1,5 @@
 import {Lyric} from "./lyric";
-import {ApiSong} from "./apiSong";
+import {ApiSong} from "./api/apiSong";
 import { BrowserStack } from 'protractor/built/driverProviders';
 
 export class Song {

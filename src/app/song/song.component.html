@@ -1,0 +1,49 @@
+<div *ngIf="song != null" class="song">
+
+  <img [src]="song.cover"/>
+
+<div>
+  <a [href]="song.url">{{song.title}}</a>
+</div>
+
+
+  <div class="song__langs">
+      <div>Choose your language : </div>
+      <ul class="list-group list-group-horizontal">
+          <li *ngFor="let lang of song.langs" type="button" class="list-group-item list-group-item-action"
+            [ngClass]="langsIsDisplayed.get(lang) ? 'active' : ''"
+            (click)="updateLangToDisplay(lang)"
+          >
+            {{lang}}
+        </li>
+      </ul>
+  </div>
+
+  <div>
+
+    <div *ngFor="let lyricLangs of song.lyrics" class="lyric container-fluid">
+
+      <div *ngFor="let lyricLang of lyricLangs" class="lyric__lang row justify-content-around"
+        [ngClass]="'lyric__lang--' + lyricLang.lang">
+
+        <div *ngIf="langsIsDisplayed.get(lyricLang.lang)" class="lyric__lang__container">
+
+            <div *ngFor="let word of lyricLang.words; let wordPos = index" class="lyric__lang__container__word col text-center">
+
+              {{word}}
+      
+              <div *ngIf="lyricLang.phoneWords[wordPos] != null" class="lyric__lang__container__word__phonetic">
+                {{lyricLang.phoneWords[wordPos]}}
+              </div>
+      
+            </div>
+
+        </div>
+        
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

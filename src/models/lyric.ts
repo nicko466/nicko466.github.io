@@ -6,9 +6,9 @@ export class Lyric {
 
   public phoneWords: string[] = [];
 
-  constructor(lang, sentences, phoneWords) {
+  constructor(lang: ApiLang, sentence: string, phoneWords: string) {
     this.lang = lang;
-    this.words = this.extractWords(sentences);
+    this.words = this.extractWords(sentence);
     this.phoneWords = this.extractWords(phoneWords);
   }
 
