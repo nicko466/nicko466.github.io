@@ -2,9 +2,10 @@
   "name": "cs",
   "version": "0.0.0",
   "scripts": {
+    "deploy": "yarn run build && angular-cli-ghpages",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href https://nicko466.github.io/home/ --output-path home --deploy-url /home/",
+    "build": "ng build --prod --base-href https://nicko466.github.io/myplayground/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
