@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SongService } from '../../services/song.service';
+import { RepoService } from '../../services/repo.service';
 import { JsonConvert } from 'json2typescript';
 import { ApiSong } from '../../models/api/apiSong';
 import { Song } from '../../models/song';
@@ -16,7 +16,7 @@ export class SongComponent implements OnInit {
   public langsIsDisplayed: Map<ApiLang, boolean> = new Map<ApiLang, boolean>();
 
   constructor(
-    private songservice: SongService,
+    private songservice: RepoService,
     private route: ActivatedRoute
   ) {
   }

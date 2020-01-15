@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiSong} from "../../models/api/apiSong";
-import {SongService} from "../../services/song.service";
+import {RepoService} from "../../services/repo.service";
 import {JsonConvert} from "json2typescript";
 import {Song} from "../../models/song";
 import { ApiSongs } from '../../models/api/apiSongs';
@@ -15,7 +15,7 @@ export class SongsComponent implements OnInit {
   public songs: ApiSongs;
 
   constructor(
-    private songservice: SongService,
+    private songservice: RepoService,
   ) {
   }
 
