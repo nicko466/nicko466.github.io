@@ -3,7 +3,7 @@
   <div *ngFor="let word of words; index as i" class="words">
 
 
-    <div class="words__item" (mouseenter)="displayHanzi(word)"  (mouseleave)="hideHanzi()">
+    <div class="words__item" (mouseenter)="displayHanzi(i)"  (mouseleave)="hideHanzi()">
       {{word}}
     </div>
 

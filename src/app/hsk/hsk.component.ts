@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RepoService} from "../../services/repo.service";
 import {JsonConvert} from "json2typescript";
 import {ApiHsk} from "../../models/api/hsk";
+import {ApiWord} from "../../models/api/word";
 
 @Component({
   selector: 'app-hsk',
@@ -13,6 +14,9 @@ export class HskComponent implements OnInit {
   private text: string;
   private words: string[];
   private apiHsk: ApiHsk;
+
+  public pynyin: string;
+  public translate: string;
 
   constructor(private repoService: RepoService) { }
 
@@ -53,6 +57,20 @@ export class HskComponent implements OnInit {
 
   }
 
-  displayHanzi(word: string) {
+  displayHanzi(i: number) {
+    console.error(this.words[i]);
+    let found = this.apiHsk.words.find((word: ApiWord) => word.hanzi === this.words[i]);
+
+    if (found == null) {
+
+    }
+
+    console.error(found);
+  }
+
+  private getHskWord(indexWord: number, ): ApiWord {
+
+
+    return null;
   }
 }
