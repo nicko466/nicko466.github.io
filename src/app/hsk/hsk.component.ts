@@ -12,7 +12,7 @@ import {ApiWord} from "../../models/api/word";
 export class HskComponent implements OnInit {
 
   private text: string;
-  private words: string[];
+  public words: string[];
   private apiHsk: ApiHsk;
 
   public pynyin: string;
