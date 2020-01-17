@@ -36,8 +36,14 @@ export class HskComponent implements OnInit {
 
         this.words = this.text.match(/./g);
 
-        this.repoService.getHSKJSON("6")
-            .subscribe(
+        Promise.all([
+            this.repoService.getHSKJSON("1"),
+            this.repoService.getHSKJSON("2"),
+            this.repoService.getHSKJSON("3"),
+            this.repoService.getHSKJSON("4"),
+            this.repoService.getHSKJSON("5"),
+            this.repoService.getHSKJSON("6"),
+        ]).then(
                 (data: any) => {
                     console.log(data);
 
