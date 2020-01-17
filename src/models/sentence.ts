@@ -1,6 +1,5 @@
-
 export class Sentence {
 
-  private word: string[];
+    private word: string[];
 
 }

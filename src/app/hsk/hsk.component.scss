@@ -1,22 +1,19 @@
 
-
-
 .hsk {
 
-  margin: 30px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    margin: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-  justify-content: center;
+    justify-content: center;
 
-  .words {
+    .words {
 
-    &__item {
-      margin: 10px;
+        &__item {
+            margin: 10px;
+        }
+
     }
-
-  }
-
 
 }

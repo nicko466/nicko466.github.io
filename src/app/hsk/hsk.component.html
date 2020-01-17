@@ -1,19 +1,18 @@
 <div class="hsk">
 
-  <div *ngFor="let word of words; index as i" class="words">
+    <div *ngFor="let word of words; index as i" class="words">
 
 
-    <div class="words__item" (mouseenter)="displayHanzi(i)"  (mouseleave)="hideHanzi()">
-      {{word}}
+        <div class="words__item" (mouseenter)="displayHanzi(i)" (mouseleave)="hideHanzi()">
+            {{word}}
+        </div>
+
+
     </div>
 
 
+    <p>
 
-  </div>
-
-
-  <p>
-
-  </p>
+    </p>
 
 </div>

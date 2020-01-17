@@ -4,16 +4,16 @@ import {ApiLyric} from "./apiLyric";
 @JsonObject("Song")
 export class ApiSong {
 
-  @JsonProperty("title", String)
-  public title: string = null;
+    @JsonProperty("title", String)
+    public title: string = null;
 
-  @JsonProperty("url", String)
-  public url: string = null;
+    @JsonProperty("url", String)
+    public url: string = null;
 
-  @JsonProperty("cover", String)
-  public cover: string = null;
+    @JsonProperty("cover", String)
+    public cover: string = null;
 
-  @JsonProperty("lyrics", [ApiLyric])
-  public lyrics: ApiLyric[] = null;
+    @JsonProperty("lyrics", [ApiLyric])
+    public lyrics: ApiLyric[] = null;
 
 }

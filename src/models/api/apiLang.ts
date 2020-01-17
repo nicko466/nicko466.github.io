@@ -1,5 +1,5 @@
 enum ApiLang {
-  Fr,
-  En,
-  Cn
+    Fr,
+    En,
+    Cn
 }

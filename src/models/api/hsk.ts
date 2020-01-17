@@ -4,8 +4,8 @@ import {ApiWord} from "./word";
 @JsonObject("Hsk")
 export class ApiHsk {
 
-  @JsonProperty("words", [ApiWord])
-  public words: ApiWord[] = null;
+    @JsonProperty("words", [ApiWord])
+    public words: ApiWord[] = null;
 
 }
 
