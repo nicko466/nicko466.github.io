@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## deployment
 
-ng build --prod --base-href https://nicko466.github.io/home/ --output-path home 
+yarn deploy 

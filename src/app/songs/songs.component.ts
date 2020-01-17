@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiSong} from "../../models/api/apiSong";
 import {RepoService} from "../../services/repo.service";
 import {JsonConvert} from "json2typescript";
-import {Song} from "../../models/song";
 import {ApiSongs} from '../../models/api/apiSongs';
 
 @Component({

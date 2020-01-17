@@ -1,4 +1,4 @@
-<div class="cards">
+<div *ngIf="songs != null" class="cards">
     <div *ngFor="let songDescr of songs.songDescr" class="card" style="width: 18rem;">
         <img src="{{songDescr.cover}}" class="card-img-top" alt="cover">
         <div class="card-body">
