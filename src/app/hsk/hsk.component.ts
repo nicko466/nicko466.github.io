@@ -3,6 +3,7 @@ import {RepoService} from '../../services/repo.service';
 import {JsonConvert} from 'json2typescript';
 import {ApiHsk} from '../../models/api/hsk';
 import {ApiWord} from '../../models/api/word';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-hsk',
@@ -23,7 +24,6 @@ export class HskComponent implements OnInit {
     }
 
     ngOnInit() {
-
         this.text = `森林里住着好多小动物，有聪明的狐狸、可爱的小兔子、善良的大象、慈祥的老猴子……还有一只爱美的小刺猬。小刺猬觉得呀，自己是这个森林里最漂亮的。
     有一次，小刺猬正在河边洗脸，听到不远处大家的欢笑声。走近一看，发现平时不起眼的山羊姐姐烫了头发，变得非常美丽，大家正在夸奖她呢。小刺猬不高兴了，心里想：我也要去烫头发，让自己变得更美丽。
     第二天，小刺猬就来到了森林美发店，跟美发师孔雀阿姨说：“阿姨，我想烫一个山羊姐姐那样的头发，一个圆圈一个圆圈的，好像方便面一样，可漂亮了。”
@@ -64,19 +64,56 @@ export class HskComponent implements OnInit {
     updateTooltip(i: number) {
         console.error(this.words[i]);
         this.tooltipText = 'NA';
-        const found: ApiWord = this.hanzi.find((word: ApiWord) => word.hanzi === this.words[i]);
 
-        if (found != null) {
-            this.tooltipText = found.toString();
+        this.tooltipText = this.getUniqueElement(i, 4);
+
+        console.error(this.tooltipText);
+    }
+
+
+    private getUniqueElement(wordPosition: number , wordMaxSize: number): string {
+        // get words that contains
+        const wordsCandidate: ApiWord[] = this.hanzi
+            .filter((wordEl: ApiWord) => wordEl.hanzi.includes(this.words[wordPosition]));
+        console.error(`word candidates are ${wordsCandidate}`);
+
+        if (wordsCandidate.length === 1) {
+            return wordsCandidate[0].toString();
         }
 
-        console.error(found);
+        if (wordsCandidate.length === 0) {
+            return 'NA';
+        }
+
+        let word: ApiWord = null;
+        for (let wordSize: number = wordMaxSize; wordSize !== 0; wordSize--) {
+            word = this.getApiWord(wordPosition, wordSize, wordsCandidate);
+
+            if (word != null) {
+                return word.toString();
+            }
+        }
+
+        return 'NA';
     }
 
-    private getHskWord(indexWord: number, ): ApiWord {
+    private getApiWord(wordPosition: number, wordSize: number, wordsCandidate: ApiWord[]): ApiWord {
+        const maxIndex = wordPosition + wordSize > this.words.length ?
+            this.words.length : wordPosition + wordSize;
 
+        let subWords: string = this.words.slice(wordPosition, maxIndex).join('');
+        let result: ApiWord = wordsCandidate.find((value: ApiWord) => value.hanzi === subWords);
 
-        return null;
+        if (result != null) {
+            return result;
+        }
+
+        const minusIndex = wordSize - wordPosition > 0 || this.words.length < wordSize ?
+            0 : wordPosition - wordSize;
+
+        subWords = this.words.slice(minusIndex, wordPosition + 1).join('');
+        result = wordsCandidate.find((value) => value.hanzi === subWords);
+
+        return result;
     }
-
 }
