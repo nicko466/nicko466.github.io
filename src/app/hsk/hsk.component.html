@@ -2,8 +2,8 @@
 
     <div *ngFor="let word of words; index as i" class="words">
 
-
         <div
+            [ngClass]="{higlight: indexToHighlight.includes(i)}"
             class="words__item"
              #tooltip="matTooltip"
              matTooltip="{{tooltipText}}"

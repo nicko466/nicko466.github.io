@@ -1,7 +1,8 @@
 
 .hsk {
 
-    margin: 30px;
+    margin: 50px;
+    font-size: 1.4em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -11,7 +12,11 @@
     .words {
 
         &__item {
-            margin: 10px;
+            padding: 2px;
+        }
+
+        .higlight {
+            background-color: yellow;
         }
 
     }

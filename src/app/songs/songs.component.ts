@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RepoService} from "../../services/repo.service";
 import {JsonConvert} from "json2typescript";
-import {ApiSongs} from '../../models/api/apiSongs';
+import {ApiSongs} from '../../models/api/song/apiSongs';
 
 @Component({
     selector: 'app-songs',

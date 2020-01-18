@@ -1,5 +1,5 @@
 import {Lyric} from "./lyric";
-import {ApiSong} from "./api/apiSong";
+import {ApiSong} from "./api/song/apiSong";
 import {BrowserStack} from 'protractor/built/driverProviders';
 
 export class Song {
@@ -52,7 +52,7 @@ export class Song {
                         apiSong.lyrics[indexLang].sentences[indexSentence],
                         apiSong.lyrics[indexLang].phonetic[indexSentence]
                     )
-                )
+                );
 
             }
 

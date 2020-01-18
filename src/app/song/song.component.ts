@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RepoService} from '../../services/repo.service';
 import {JsonConvert} from 'json2typescript';
-import {ApiSong} from '../../models/api/apiSong';
+import {ApiSong} from '../../models/api/song/apiSong';
 import {Song} from '../../models/song';
 import {ActivatedRoute} from '@angular/router';
 
