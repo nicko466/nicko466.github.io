@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {RepoService} from "../../services/repo.service";
-import {JsonConvert} from "json2typescript";
-import {ApiHsk} from "../../models/api/hsk";
-import {ApiWord} from "../../models/api/word";
+import {RepoService} from '../../services/repo.service';
+import {JsonConvert} from 'json2typescript';
+import {ApiHsk} from '../../models/api/hsk';
+import {ApiWord} from '../../models/api/word';
 
 @Component({
     selector: 'app-hsk',
@@ -13,10 +13,11 @@ export class HskComponent implements OnInit {
 
     private text: string;
     public words: string[];
-    private apiHsk: ApiHsk;
+    private hanzi: ApiWord[];
 
     public pynyin: string;
     public translate: string;
+    public tooltipText: string;
 
     constructor(private repoService: RepoService) {
     }
@@ -32,51 +33,50 @@ export class HskComponent implements OnInit {
     小刺猬高兴地离开了美发店，回家的路上，她想象着大家夸她漂亮的样子，心里别提多开心了。可是，走到一半的时候，大灰狼从草丛里跳了出来，他流着口水说：“小刺猬，平时你的刺尖尖的，我不敢咬你，但是今天你的刺都变圆了，我就能舒舒服服地吃你了！哈哈哈哈”小刺猬吓得赶紧缩成一团——没有了尖尖的刺，大灰狼不再怕他了。
     小刺猬吓得哭了起来。还好，大象叔叔和猴子爷爷听到哭声赶跑了大灰狼，救了小刺猬。
     猴子爷爷抱着吓坏了的小刺猬，慢慢地说：“傻孩子，你的头发和山羊的头发不一样，你的刺能够保护你不被伤害，还能用来搬运自己喜欢的果子。如果把自己变成别人的样子，就过不了自己的生活，再漂亮也不是自己了。”
-    小刺猬明白了，她马上回到美发店，把自己的刺变回原来的样子。从镜子里看着变回来的自己，她又可以保护自己了，她又是那个最漂亮的小刺猬了。`
+    小刺猬明白了，她马上回到美发店，把自己的刺变回原来的样子。从镜子里看着变回来的自己，她又可以保护自己了，她又是那个最漂亮的小刺猬了。`;
 
         this.words = this.text.match(/./g);
 
-        Promise.all([
-            this.repoService.getHSKJSON("1"),
-            this.repoService.getHSKJSON("2"),
-            this.repoService.getHSKJSON("3"),
-            this.repoService.getHSKJSON("4"),
-            this.repoService.getHSKJSON("5"),
-            this.repoService.getHSKJSON("6"),
-        ]).then(
-                (data: any) => {
-                    console.log(data);
+        let hskLevel = 1;
+        const hskPromise: Promise<any>[] = [];
+        for (hskLevel = 1; hskLevel < 6; hskLevel++) {
+            hskPromise.push(this.repoService.getHSKJSON(hskLevel.toString()));
+        }
 
-                    let jsonConvert: JsonConvert = new JsonConvert();
-                    this.apiHsk = jsonConvert.deserializeObject(data, ApiHsk);
+        Promise.all(
+            hskPromise
+        ).then(
+            (data: any[]) => {
+                const tmp: ApiHsk[] = [];
+                const jsonConvert: JsonConvert = new JsonConvert();
+                for (const hskElement of data) {
+                    tmp.push(jsonConvert.deserializeObject(hskElement, ApiHsk));
+                }
+                this.hanzi = tmp.flatMap((value, index) => value.words);
+                console.log(this.hanzi);
+            },
+            (error) => console.error(`Failed to get data due to ${error} `)
+        );
 
-                    console.log(this.apiHsk);
-
-                },
-                (error) => console.error(`Failed to get data due to ${error} `)
-            );
-
-
-    }
-
-    hideHanzi() {
 
     }
 
-    displayHanzi(i: number) {
+    updateTooltip(i: number) {
         console.error(this.words[i]);
-        let found = this.apiHsk.words.find((word: ApiWord) => word.hanzi === this.words[i]);
+        this.tooltipText = 'NA';
+        const found: ApiWord = this.hanzi.find((word: ApiWord) => word.hanzi === this.words[i]);
 
-        if (found == null) {
-
+        if (found != null) {
+            this.tooltipText = found.toString();
         }
 
         console.error(found);
     }
 
-    private getHskWord(indexWord: number,): ApiWord {
+    private getHskWord(indexWord: number, ): ApiWord {
 
 
         return null;
     }
+
 }

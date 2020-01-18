@@ -3,16 +3,22 @@
     <div *ngFor="let word of words; index as i" class="words">
 
 
-        <div class="words__item" (mouseenter)="displayHanzi(i)" (mouseleave)="hideHanzi()">
-            {{word}}
+        <div
+            class="words__item"
+             #tooltip="matTooltip"
+             matTooltip="{{tooltipText}}"
+             matTooltipPosition="below"
+             matTooltipClass="custom-tooltip"
+             matTooltipHideDelay="1000"
+             (mouseenter)="$event.stopImmediatePropagation()"
+             (mouseover)="$event.stopImmediatePropagation()"
+             (mouseleave)="$event.stopImmediatePropagation()"
+             (click)="updateTooltip(i);tooltip.toggle();"
+        >
+            <span>{{word}}</span>
         </div>
 
 
     </div>
-
-
-    <p>
-
-    </p>
 
 </div>

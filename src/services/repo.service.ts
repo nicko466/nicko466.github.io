@@ -13,8 +13,8 @@ export class RepoService {
         return this.httpClient.get(`./assets/songs/${element}.json`);
     }
 
-    public getHSKJSON(element: string): Promise<ApiHsk> {
-        return this.httpClient.get(`./assets/hsk/hsk-level-${element}.json`).toPromise();
+    public getHSKJSON(element: string): Promise<any> {
+        return  this.httpClient.get(`./assets/hsk/hsk-level-${element}.json`).toPromise();
     }
 
 }
