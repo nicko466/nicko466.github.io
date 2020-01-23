@@ -19,7 +19,7 @@ export class SongsComponent implements OnInit {
 
     ngOnInit() {
         this.songservice
-            .getJSON("songs")
+            .getSong("songs")
             .subscribe(
                 (data: any) => {
                     let jsonConvert: JsonConvert = new JsonConvert();

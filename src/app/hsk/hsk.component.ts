@@ -123,7 +123,7 @@ export class HskComponent implements OnInit {
         let hskLevel = 1;
         const hskPromise: Promise<any>[] = [];
         for (hskLevel = 1; hskLevel < 6; hskLevel++) {
-            hskPromise.push(this.repoService.getHSKJSON(hskLevel.toString()));
+            hskPromise.push(this.repoService.getHSK(hskLevel.toString()));
         }
 
         Promise.all(

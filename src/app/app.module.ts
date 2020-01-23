@@ -13,6 +13,15 @@ import {MatButtonModule, MatTooltipModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 
+import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
+
+export class MyHammerConfig extends HammerGestureConfig {
+    overrides = {
+        pinch: { enable: false },
+        rotate: { enable: false }
+    } as any;
+}
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -30,6 +39,10 @@ import 'hammerjs';
         MatButtonModule,
     ],
     providers: [
+        {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: MyHammerConfig
+        },
         RepoService
     ],
     bootstrap: [AppComponent]

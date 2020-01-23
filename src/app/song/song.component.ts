@@ -24,7 +24,7 @@ export class SongComponent implements OnInit {
     public ngOnInit() {
         let id: string = this.route.snapshot.paramMap.get("id");
         this.songservice
-            .getJSON(id)
+            .getSong(id)
             .subscribe(
                 (data: any) => {
                     let jsonConvert: JsonConvert = new JsonConvert();
