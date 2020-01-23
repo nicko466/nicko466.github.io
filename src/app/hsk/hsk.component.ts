@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {RepoService} from '../../services/repo.service';
 import {JsonConvert} from 'json2typescript';
 import {ApiHsk} from '../../models/api/hsk/hsk';
-import {ApiWord} from '../../models/api/hsk/word';
+import {Hanzi} from '../../models/hanzi';
+import {CedictWord} from '../../models/api/cedict/cedict-word';
+import {Cedict} from '../../models/api/cedict/cedict';
 
 export interface WordFound {
-    word: ApiWord;
+    hanzi: Hanzi;
     indexes: number[];
 }
 
@@ -18,7 +20,7 @@ export class HskComponent implements OnInit {
 
     private text: string;
     public words: string[];
-    public hanzi: ApiWord[];
+    public hanzi: Hanzi[];
     public indexToHighlight: number[] = [];
 
     public tooltipText: string;
@@ -40,6 +42,84 @@ export class HskComponent implements OnInit {
 
         this.words = this.text.match(/./g);
 
+        // this.initAllHsks();
+
+        this.initCedict();
+
+    }
+
+    public updateTooltip(wordIndex: number) {
+        this.tooltipText = this.getUniqueElement(wordIndex, 4);
+
+    }
+
+
+    private getUniqueElement(wordIndex: number , wordMaxSize: number): string {
+        // get words that contains the word
+        const wordsCandidate: Hanzi[] = this.hanzi
+            .filter((wordEl: Hanzi) => wordEl.simplified.includes(this.words[wordIndex]));
+
+        if (wordsCandidate.length === 0) {
+            this.indexToHighlight = [];
+            return 'NA';
+        }
+
+        let word: WordFound = null;
+        for (let wordSize: number = wordMaxSize; wordSize !== 0; wordSize--) {
+            word = this.getHanzi(wordIndex, wordSize, wordsCandidate);
+
+            if (word != null) {
+                this.indexToHighlight = word.indexes;
+                return word.hanzi.toString();
+            }
+        }
+
+        this.indexToHighlight = [];
+        return 'NA';
+    }
+
+    private getHanzi(wordPosition: number, wordSize: number, wordsCandidate: Hanzi[]): WordFound {
+        const wordFound: WordFound = {
+            indexes: [],
+            hanzi: null
+        };
+
+        const maxIndex = wordPosition + wordSize > this.words.length ?
+            this.words.length : wordPosition + wordSize;
+
+        let result: Hanzi = this.getWord(wordPosition, maxIndex, wordsCandidate);
+
+        if (result != null) {
+            wordFound.hanzi = result;
+            wordFound.indexes =
+                Array.from({length: maxIndex - wordPosition}, (v, k) => k + wordPosition);
+
+            return wordFound;
+        }
+
+        const minusIndex = wordSize - wordPosition > 0 || this.words.length < wordSize ?
+            0 : wordPosition - wordSize;
+
+        result = this.getWord(minusIndex, wordPosition + 1, wordsCandidate);
+
+        if (result != null) {
+            wordFound.hanzi = result;
+            wordFound.indexes =
+                Array.from({length: wordPosition  + 1 - minusIndex}, (v, k) => k + minusIndex);
+
+            return wordFound;
+        }
+
+        return null;
+    }
+
+    private getWord(idx0: number, idx1: number, wordsCandidate: Hanzi[]): Hanzi {
+        const subWords: string = this.words.slice(idx0, idx1).join('');
+
+        return wordsCandidate.find((value) => value.simplified === subWords);
+    }
+
+    private initAllHsks() {
         let hskLevel = 1;
         const hskPromise: Promise<any>[] = [];
         for (hskLevel = 1; hskLevel < 6; hskLevel++) {
@@ -55,84 +135,29 @@ export class HskComponent implements OnInit {
                 for (const hskElement of data) {
                     tmp.push(jsonConvert.deserializeObject(hskElement, ApiHsk));
                 }
-                this.hanzi = tmp.flatMap((value, index) => value.words);
+                this.hanzi = tmp.flatMap((value, index) =>
+                    value.words.map((apiWord, index1) => apiWord.toHanzi())
+                );
             },
             (error) => console.error(`Failed to get data due to ${error} `)
         );
-
-
     }
 
-    public updateTooltip(wordIndex: number) {
-        this.tooltipText = this.getUniqueElement(wordIndex, 4);
+    private initCedict() {
+
+        this.repoService.getCedictDico()
+            .then(
+                (data: Cedict) => {
+                    const tmp: CedictWord[] = [];
+                    const jsonConvert: JsonConvert = new JsonConvert();
+                    for (const cedictWord of data.cedictWord) {
+                        tmp.push(jsonConvert.deserializeObject(cedictWord, CedictWord));
+                    }
+                    this.hanzi = tmp.flatMap((cedictWord, index) =>
+                        cedictWord.toHanzi()
+                    );
+                },
+                (error) => console.error(`Failed to get data due to ${error} `)
+            );
     }
-
-
-    private getUniqueElement(wordIndex: number , wordMaxSize: number): string {
-        // get words that contains the word
-        const wordsCandidate: ApiWord[] = this.hanzi
-            .filter((wordEl: ApiWord) => wordEl.hanzi.includes(this.words[wordIndex]));
-
-        if (wordsCandidate.length === 0) {
-            this.indexToHighlight = [];
-            return 'NA';
-        }
-
-        let word: WordFound = null;
-        for (let wordSize: number = wordMaxSize; wordSize !== 0; wordSize--) {
-            word = this.getApiWord(wordIndex, wordSize, wordsCandidate);
-
-            if (word != null) {
-                console.log(word);
-
-                this.indexToHighlight = word.indexes;
-                return word.word.toString();
-            }
-        }
-
-        this.indexToHighlight = [];
-        return 'NA';
-    }
-
-    private getApiWord(wordPosition: number, wordSize: number, wordsCandidate: ApiWord[]): WordFound {
-        const wordFound: WordFound = {
-            indexes: [],
-            word: null
-        };
-
-        const maxIndex = wordPosition + wordSize > this.words.length ?
-            this.words.length : wordPosition + wordSize;
-
-        let result: ApiWord = this.getWord(wordPosition, maxIndex, wordsCandidate);
-
-        if (result != null) {
-            wordFound.word = result;
-            wordFound.indexes =
-                Array.from({length: maxIndex - wordPosition}, (v, k) => k + wordPosition);
-
-            return wordFound;
-        }
-
-        const minusIndex = wordSize - wordPosition > 0 || this.words.length < wordSize ?
-            0 : wordPosition - wordSize;
-
-        result = this.getWord(minusIndex, wordPosition + 1, wordsCandidate);
-
-        if (result != null) {
-            wordFound.word = result;
-            wordFound.indexes =
-                Array.from({length: wordPosition  + 1 - minusIndex}, (v, k) => k + minusIndex);
-
-            return wordFound;
-        }
-
-        return null;
-    }
-
-    private getWord(idx0: number, idx1: number, wordsCandidate: ApiWord[]): ApiWord {
-        const subWords: string = this.words.slice(idx0, idx1).join('');
-
-        return wordsCandidate.find((value) => value.hanzi === subWords);
-    }
-
 }

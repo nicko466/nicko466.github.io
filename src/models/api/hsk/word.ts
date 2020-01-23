@@ -1,4 +1,5 @@
 import {JsonObject, JsonProperty} from "json2typescript";
+import {Hanzi} from '../../hanzi';
 
 @JsonObject("word")
 export class ApiWord {
@@ -15,8 +16,15 @@ export class ApiWord {
     @JsonProperty("translations", [String])
     public translations: string[] = [];
 
-    public toString(): string {
-        return `${this.hanzi}\n${this.pinyin}\n${this.translations}`;
+
+    public toHanzi(): Hanzi {
+        return new Hanzi(
+            '',
+            this.hanzi,
+            this.pinyin,
+            this.translations
+        );
     }
+
 
 }

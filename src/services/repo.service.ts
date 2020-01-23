@@ -17,4 +17,8 @@ export class RepoService {
         return  this.httpClient.get(`./assets/hsk/hsk-level-${element}.json`).toPromise();
     }
 
+    public getCedictDico(): Promise<any> {
+        return  this.httpClient.get(`./assets/cedict/cedict.json`).toPromise();
+    }
+
 }
