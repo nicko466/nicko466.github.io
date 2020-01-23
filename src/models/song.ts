@@ -1,6 +1,5 @@
-import {Lyric} from "./lyric";
-import {ApiSong} from "./api/song/apiSong";
-import {BrowserStack} from 'protractor/built/driverProviders';
+import {Lyric} from './lyric';
+import {ApiSong} from './api/song/apiSong';
 
 export class Song {
 
@@ -22,12 +21,12 @@ export class Song {
     }
 
     public getLyrics(apiSong: ApiSong): Lyric[][] {
-        let lyrics: string[][] = apiSong.lyrics
+        const lyrics: string[][] = apiSong.lyrics
             .map((value) => value.sentences);
 
-        let result: Lyric[][] = [];
-        let numberOflang: number = 0;
-        let numberOfSentences: number = 0;
+        const result: Lyric[][] = [];
+        let numberOflang = 0;
+        let numberOfSentences = 0;
         if (Array.isArray(lyrics) && lyrics.length > 0) {
             numberOflang = lyrics.length;
 
@@ -42,7 +41,7 @@ export class Song {
 
             for (let indexLang = 0; indexLang < numberOflang; indexLang++) {
 
-                let apiLang: ApiLang = apiSong.lyrics[indexLang].getLang();
+                const apiLang: ApiLang = apiSong.lyrics[indexLang].getLang();
 
                 this.langs.add(apiLang);
 

@@ -1,10 +1,10 @@
-import {JsonObject, JsonProperty} from "json2typescript";
-import {ApiWord} from "./word";
+import {JsonObject, JsonProperty} from 'json2typescript';
+import {ApiWord} from './word';
 
-@JsonObject("Hsk")
+@JsonObject('Hsk')
 export class ApiHsk {
 
-    @JsonProperty("words", [ApiWord])
+    @JsonProperty('words', [ApiWord])
     public words: ApiWord[] = null;
 
 }

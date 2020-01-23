@@ -1,4 +1,3 @@
-import {JsonProperty} from 'json2typescript';
 
 export class Hanzi {
 

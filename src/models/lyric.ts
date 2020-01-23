@@ -18,13 +18,13 @@ export class Lyric {
 
     public setLang(lang: string) {
         switch (lang) {
-            case "fr":
+            case 'fr':
                 this.lang = ApiLang.Fr;
                 break;
-            case "en":
+            case 'en':
                 this.lang = ApiLang.En;
                 break;
-            case "cn":
+            case 'cn':
                 this.lang = ApiLang.Cn;
                 break;
         }
@@ -33,8 +33,8 @@ export class Lyric {
     private extractWords(sentence: string): string[] {
         return sentence != null ?
             sentence
-                .replace(/\s/g, "")
-                .split(",") : [];
+                .replace(/\s/g, '')
+                .split(',') : [];
     }
 
 }
