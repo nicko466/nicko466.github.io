@@ -9,7 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SongsComponent} from './songs/songs.component';
 import {HskComponent} from './hsk/hsk.component';
-import {MatButtonModule, MatTooltipModule} from '@angular/material';
+import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 
@@ -37,6 +37,10 @@ export class MyHammerConfig extends HammerGestureConfig {
         HttpClientModule,
         MatTooltipModule,
         MatButtonModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
     ],
     providers: [
         {

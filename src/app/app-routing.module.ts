@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {SongComponent} from './song/song.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SongsComponent} from './songs/songs.component';
-import {HskComponent} from "./hsk/hsk.component";
+import {HskComponent} from './hsk/hsk.component';
 
 const routes: Routes = [
     {path: '', component: SongsComponent},

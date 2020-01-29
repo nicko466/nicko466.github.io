@@ -1,9 +1,20 @@
 <div class="app">
 
-    <h1>
-        Welcome to {{ title }}! <a href="/myplayground/hsk">(HSK)</a>
-    </h1>
+    <mat-toolbar color="primary" class="app--toolbar">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <h1 class="app--toolbar--name">{{title}}</h1>
+    </mat-toolbar>
 
-    <router-outlet></router-outlet>
+    <mat-sidenav-container class="app--sidenav-container">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
+            <mat-nav-list>
+                <a mat-list-item routerLink="{{nav.url}}" *ngFor="let nav of fillerNav">{{nav.text}}</a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 
 </div>
