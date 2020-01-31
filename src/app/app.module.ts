@@ -9,7 +9,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SongsComponent} from './songs/songs.component';
 import {HskComponent} from './hsk/hsk.component';
-import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 
