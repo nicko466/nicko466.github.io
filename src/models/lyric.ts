@@ -1,3 +1,5 @@
+import './api/song/apiLang';
+
 export class Lyric {
 
     public lang: ApiLang = null;
