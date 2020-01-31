@@ -11,9 +11,8 @@ export interface INavButton {
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent {
 
-    public mobileQuery: MediaQueryList;
     public title = 'My playground';
     public fillerNav: INavButton [] = [
         {
@@ -29,16 +28,5 @@ export class AppComponent implements OnDestroy {
             text : 'Lyrics 5',
         },
     ];
-    private readonly mobileQueryListener: () => void;
-
-    constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-        this.mobileQuery = media.matchMedia('(max-width: 600px)');
-        this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-        this.mobileQuery.addEventListener('change', this.mobileQueryListener);
-    }
-
-    ngOnDestroy(): void {
-        this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
-    }
 
 }

@@ -9,6 +9,10 @@
     right: 0;
     background-color: #EFEDEC;
 
+    .mat-sidenav-content {
+        display: flex;
+    }
+
     &--sidenav-container {
         height: 100%;
     }

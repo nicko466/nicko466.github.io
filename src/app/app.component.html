@@ -6,9 +6,16 @@
     </mat-toolbar>
 
     <mat-sidenav-container class="app--sidenav-container">
-        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
+        <mat-sidenav #snav [mode]="'over'">
             <mat-nav-list>
-                <a mat-list-item routerLink="{{nav.url}}" *ngFor="let nav of fillerNav">{{nav.text}}</a>
+                <a
+                    mat-list-item
+                    routerLink="{{nav.url}}"
+                    *ngFor="let nav of fillerNav"
+                    (click)="snav.toggle()"
+                >
+                    {{nav.text}}
+                </a>
             </mat-nav-list>
         </mat-sidenav>
 
