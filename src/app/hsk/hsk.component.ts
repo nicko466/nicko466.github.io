@@ -5,9 +5,10 @@ import {ApiHsk} from '../../models/api/hsk/hsk';
 import {Hanzi} from '../../models/hanzi';
 import {CedictWord} from '../../models/api/cedict/cedict-word';
 import {Cedict} from '../../models/api/cedict/cedict';
+import {map} from 'rxjs/operators';
 
-export interface WordFound {
-    hanzi: Hanzi;
+export interface WordsFound {
+    hanzis: Hanzi[];
     indexes: number[];
 }
 
@@ -45,12 +46,10 @@ export class HskComponent implements OnInit {
         // this.initAllHsks();
 
         this.initCedict();
-
     }
 
     public updateTooltip(wordIndex: number) {
         this.tooltipText = this.getUniqueElement(wordIndex, 4);
-
     }
 
 
@@ -59,38 +58,37 @@ export class HskComponent implements OnInit {
         const wordsCandidate: Hanzi[] = this.hanzi
             .filter((wordEl: Hanzi) => wordEl.simplified.includes(this.words[wordIndex]));
 
-        if (wordsCandidate.length === 0) {
-            this.indexToHighlight = [];
-            return 'NA';
-        }
+        if (wordsCandidate.length !== 0) {
+            let candidate: WordsFound = null;
+            for (let wordSize: number = wordMaxSize; wordSize !== 0; wordSize--) {
+                candidate = this.getCandidate(wordIndex, wordSize, wordsCandidate);
 
-        let word: WordFound = null;
-        for (let wordSize: number = wordMaxSize; wordSize !== 0; wordSize--) {
-            word = this.getHanzi(wordIndex, wordSize, wordsCandidate);
-
-            if (word != null) {
-                this.indexToHighlight = word.indexes;
-                return word.hanzi.toString();
+                if (candidate != null) {
+                    this.indexToHighlight = candidate.indexes;
+                    return this.formatHanzis(candidate.hanzis);
+                }
             }
+
         }
 
         this.indexToHighlight = [];
+        console.error(`Failed to find translation for the hanzi ${this.words[wordIndex]}`);
         return 'NA';
     }
 
-    private getHanzi(wordPosition: number, wordSize: number, wordsCandidate: Hanzi[]): WordFound {
-        const wordFound: WordFound = {
+    private getCandidate(wordPosition: number, wordSize: number, wordsCandidate: Hanzi[]): WordsFound {
+        const wordFound: WordsFound = {
             indexes: [],
-            hanzi: null
+            hanzis: []
         };
 
         const maxIndex = wordPosition + wordSize > this.words.length ?
             this.words.length : wordPosition + wordSize;
 
-        let result: Hanzi = this.getWord(wordPosition, maxIndex, wordsCandidate);
+        let hanzis: Hanzi[] = this.getWord(wordPosition, maxIndex, wordsCandidate);
 
-        if (result != null) {
-            wordFound.hanzi = result;
+        if (hanzis.length > 0) {
+            wordFound.hanzis = hanzis;
             wordFound.indexes =
                 Array.from({length: maxIndex - wordPosition}, (v, k) => k + wordPosition);
 
@@ -100,10 +98,10 @@ export class HskComponent implements OnInit {
         const minusIndex = wordSize - wordPosition > 0 || this.words.length < wordSize ?
             0 : wordPosition - wordSize;
 
-        result = this.getWord(minusIndex, wordPosition + 1, wordsCandidate);
+        hanzis = this.getWord(minusIndex, wordPosition + 1, wordsCandidate);
 
-        if (result != null) {
-            wordFound.hanzi = result;
+        if (hanzis.length > 0) {
+            wordFound.hanzis = hanzis;
             wordFound.indexes =
                 Array.from({length: wordPosition  + 1 - minusIndex}, (v, k) => k + minusIndex);
 
@@ -113,10 +111,10 @@ export class HskComponent implements OnInit {
         return null;
     }
 
-    private getWord(idx0: number, idx1: number, wordsCandidate: Hanzi[]): Hanzi {
+    private getWord(idx0: number, idx1: number, wordsCandidate: Hanzi[]): Hanzi[] {
         const subWords: string = this.words.slice(idx0, idx1).join('');
 
-        return wordsCandidate.find((value) => value.simplified === subWords);
+        return wordsCandidate.filter((value) => value.simplified === subWords);
     }
 
     private initAllHsks() {
@@ -159,5 +157,32 @@ export class HskComponent implements OnInit {
                 },
                 (error) => console.error(`Failed to get data due to ${error} `)
             );
+    }
+
+    private formatHanzis(hanzis: Hanzi[]): string {
+        if (hanzis.length === 0) {
+            return new Hanzi('NA', 'NA' , 'NA', []).toString();
+        }
+        const hanzi: Hanzi = hanzis[0];
+
+        // if it contains multiple hanzi it must be due to same simplified hanzi
+        if (hanzis.length > 1) {
+            return hanzis.reduce( (accumulator: Hanzi, currentValue: Hanzi) => {
+
+                if (!accumulator.pinyin.includes(currentValue.pinyin)) {
+                    accumulator.pinyin += `/${currentValue.pinyin}`;
+                }
+
+                if (!accumulator.translation.toString().includes(currentValue.translation.toString())) {
+                    accumulator.translation = accumulator.translation
+                        .concat('\n')
+                        .concat(currentValue.translation);
+                }
+
+                return accumulator;
+            }, hanzi).toString();
+        }
+
+        return hanzi.toString();
     }
 }

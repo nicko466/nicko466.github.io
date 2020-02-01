@@ -19,7 +19,7 @@ export class Hanzi {
     }
 
     public toString(): string {
-        return `${this.simplified}\n${this.pinyin}\n${this.translation}`;
+        return `${this.simplified}\n${this.pinyin}\n ${this.translation.join(' ')}`;
     }
 
 }
