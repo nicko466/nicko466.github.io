@@ -1,11 +1,14 @@
 {
-    "extends": "../tsconfig.json",
+    "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../out-tsc/app",
         "types": []
     },
+    "angularCompilerOptions": {
+        "enableIvy": true
+    },
   "files": [
-    "main.ts",
+      "src/main.ts",
     "polyfills.ts"
   ]
 }
