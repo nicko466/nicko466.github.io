@@ -8,8 +8,8 @@ export class StorySummaryImpl extends StorySummary {
         super();
 
         this.id = storySummary.id;
-        this.fileName = storySummary.fileName;
-        this.url = storySummary.fileName.replace('.json', '');
+        this.title = storySummary.title;
+        this.url = storySummary.title.replace('.json', '');
     }
 
 }
