@@ -1,5 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
-import {MediaMatcher} from '@angular/cdk/layout';
+import {Component} from '@angular/core';
 
 export interface INavButton {
     url: string;
@@ -20,7 +19,7 @@ export class AppComponent {
             text : 'Home',
         },
         {
-            url : 'hsk',
+            url : 'stories',
             text : 'Hsk stories',
         },
         {

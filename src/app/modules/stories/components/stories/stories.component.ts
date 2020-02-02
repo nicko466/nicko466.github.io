@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {RepoService} from '../../services/repo.service';
+import { Component, OnInit } from '@angular/core';
+import {Hanzi} from '../../../../shared/models/hanzi';
+import {RepoService} from '../../../../../services/repo.service';
+import {ApiHsk} from '../../../../shared/models/dto/hsk/hsk';
 import {JsonConvert} from 'json2typescript';
-import {ApiHsk} from '../../models/api/hsk/hsk';
-import {Hanzi} from '../../models/hanzi';
-import {CedictWord} from '../../models/api/cedict/cedict-word';
-import {Cedict} from '../../models/api/cedict/cedict';
-import {map} from 'rxjs/operators';
+import {Cedict} from '../../../../shared/models/dto/cedict/cedict';
+import {CedictWord} from '../../../../shared/models/dto/cedict/cedict-word';
 
 export interface WordsFound {
     hanzis: Hanzi[];
@@ -13,11 +12,11 @@ export interface WordsFound {
 }
 
 @Component({
-    selector: 'app-hsk',
-    templateUrl: './hsk.component.html',
-    styleUrls: ['./hsk.component.scss']
+  selector: 'app-stories',
+  templateUrl: './stories.component.html',
+  styleUrls: ['./stories.component.scss']
 })
-export class HskComponent implements OnInit {
+export class StoriesComponent implements OnInit {
 
     private text: string;
     public words: string[];
@@ -186,3 +185,4 @@ export class HskComponent implements OnInit {
         return hanzi.toString();
     }
 }
+

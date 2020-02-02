@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RepoService} from '../../services/repo.service';
+import {RepoService} from '../../../../services/repo.service';
 import {JsonConvert} from 'json2typescript';
-import {ApiSong} from '../../models/api/song/apiSong';
+import {ApiSong} from '../../models/dto/song/apiSong';
 import {Song} from '../../models/song';
 import {ActivatedRoute} from '@angular/router';
 
@@ -22,13 +22,13 @@ export class SongComponent implements OnInit {
     }
 
     public ngOnInit() {
-        let id: string = this.route.snapshot.paramMap.get("id");
+        const id: string = this.route.snapshot.paramMap.get('id');
         this.songservice
             .getSong(id)
             .subscribe(
                 (data: any) => {
-                    let jsonConvert: JsonConvert = new JsonConvert();
-                    let apiSong: ApiSong = jsonConvert.deserializeObject(data, ApiSong);
+                    const jsonConvert: JsonConvert = new JsonConvert();
+                    const apiSong: ApiSong = jsonConvert.deserializeObject(data, ApiSong);
                     this.song = new Song(apiSong);
 
                     this.song.langs.forEach(element => {

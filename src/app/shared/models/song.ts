@@ -1,5 +1,5 @@
 import {Lyric} from './lyric';
-import {ApiSong} from './api/song/apiSong';
+import {ApiSong} from './dto/song/apiSong';
 
 export class Song {
 
