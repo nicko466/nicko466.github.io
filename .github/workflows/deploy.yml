@@ -18,5 +18,5 @@ jobs:
     - run: npm install -g @angular/cli
     - run: ng deploy --no-silent --repo=https://github.com/nicko466/myplayground.git --name="nicko446" --email=nicko466@gmail.com
       env:
-      CI: true
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        CI: true
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
