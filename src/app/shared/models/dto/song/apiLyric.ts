@@ -8,22 +8,22 @@ export class ApiLyric {
     @JsonProperty('phonetic', [String])
     public phonetic: string[] = [];
     @JsonProperty('lang', String)
-    private _lang: ApiLang = null;
+    private lang: ApiLang = null;
 
     public getLang(): ApiLang {
-        return this._lang;
+        return this.lang;
     }
 
     public setLang(lang: string) {
         switch (lang) {
             case 'fr':
-                this._lang = ApiLang.Fr;
+                this.lang = ApiLang.Fr;
                 break;
             case 'en':
-                this._lang = ApiLang.En;
+                this.lang = ApiLang.En;
                 break;
             case 'cn':
-                this._lang = ApiLang.Cn;
+                this.lang = ApiLang.Cn;
                 break;
         }
     }
