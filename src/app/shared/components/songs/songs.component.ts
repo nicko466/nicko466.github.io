@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RepoService} from "../../../../services/repo.service";
-import {JsonConvert} from "json2typescript";
+import {RepoService} from '../../../../services/repo.service';
+import {JsonConvert} from 'json2typescript';
 import {ApiSongs} from '../../models/dto/song/apiSongs';
 
 @Component({
@@ -19,7 +19,7 @@ export class SongsComponent implements OnInit {
 
     ngOnInit() {
         this.songservice
-            .getSong("songs")
+            .getSong('songs')
             .subscribe(
                 (data: any) => {
                     let jsonConvert: JsonConvert = new JsonConvert();

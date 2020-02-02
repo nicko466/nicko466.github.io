@@ -1,16 +1,14 @@
-import {JsonObject, JsonProperty} from "json2typescript";
+import {JsonObject, JsonProperty} from 'json2typescript';
 
-@JsonObject("Lyric")
+@JsonObject('Lyric')
 export class ApiLyric {
 
-    @JsonProperty("lang", String)
-    private _lang: ApiLang = null;
-
-    @JsonProperty("sentences", [String])
+    @JsonProperty('sentences', [String])
     public sentences: string[] = [];
-
-    @JsonProperty("phonetic", [String])
+    @JsonProperty('phonetic', [String])
     public phonetic: string[] = [];
+    @JsonProperty('lang', String)
+    private _lang: ApiLang = null;
 
     public getLang(): ApiLang {
         return this._lang;
@@ -18,13 +16,13 @@ export class ApiLyric {
 
     public setLang(lang: string) {
         switch (lang) {
-            case "fr":
+            case 'fr':
                 this._lang = ApiLang.Fr;
                 break;
-            case "en":
+            case 'en':
                 this._lang = ApiLang.En;
                 break;
-            case "cn":
+            case 'cn':
                 this._lang = ApiLang.Cn;
                 break;
         }

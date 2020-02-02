@@ -10,9 +10,9 @@
     <div class="song__langs">
         <div>Choose your language :</div>
         <ul class="list-group list-group-horizontal">
-            <li *ngFor="let lang of song.langs" type="button" class="list-group-item list-group-item-action"
-                [ngClass]="langsIsDisplayed.get(lang) ? 'active' : ''"
-                (click)="updateLangToDisplay(lang)"
+            <li (click)="updateLangToDisplay(lang)" *ngFor="let lang of song.langs" [ngClass]="langsIsDisplayed.get(lang) ? 'active' : ''"
+                class="list-group-item list-group-item-action"
+                type="button"
             >
                 {{lang}}
             </li>
@@ -23,8 +23,8 @@
 
         <div *ngFor="let lyricLangs of song.lyrics" class="lyric container-fluid">
 
-            <div *ngFor="let lyricLang of lyricLangs" class="lyric__lang row justify-content-around"
-                 [ngClass]="'lyric__lang--' + lyricLang.lang">
+            <div *ngFor="let lyricLang of lyricLangs" [ngClass]="'lyric__lang--' + lyricLang.lang"
+                 class="lyric__lang row justify-content-around">
 
                 <div *ngIf="langsIsDisplayed.get(lyricLang.lang)" class="lyric__lang__container">
 

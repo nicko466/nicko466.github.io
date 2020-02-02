@@ -15,16 +15,16 @@ export class AppComponent {
     public title = 'My playground';
     public fillerNav: INavButton [] = [
         {
-            url : '/',
-            text : 'Home',
+            url: '/',
+            text: 'Home',
         },
         {
-            url : 'stories',
-            text : 'Hsk stories',
+            url: 'stories',
+            text: 'Hsk stories',
         },
         {
-            url : 'songs/songs5',
-            text : 'Lyrics 5',
+            url: 'songs/songs5',
+            text: 'Lyrics 5',
         },
     ];
 

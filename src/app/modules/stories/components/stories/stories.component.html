@@ -3,17 +3,17 @@
     <div *ngFor="let word of words; index as i" class="words">
 
         <div
+            #tooltip="matTooltip"
+            (click)="updateTooltip(i);tooltip.toggle();"
+            (mouseenter)="$event.stopImmediatePropagation()"
+            (mouseleave)="$event.stopImmediatePropagation()"
+            (mouseover)="$event.stopImmediatePropagation()"
             [ngClass]="{highlight: indexToHighlight.includes(i)}"
             class="words__item"
-            #tooltip="matTooltip"
             matTooltip="{{tooltipText}}"
-            matTooltipPosition="below"
             matTooltipClass="custom-tooltip"
             matTooltipHideDelay="1000"
-            (mouseenter)="$event.stopImmediatePropagation()"
-            (mouseover)="$event.stopImmediatePropagation()"
-            (mouseleave)="$event.stopImmediatePropagation()"
-            (click)="updateTooltip(i);tooltip.toggle();"
+            matTooltipPosition="below"
         >
             {{word}}
         </div>

@@ -1,8 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 
 export enum EnumImage {
-    landscape = 'landpage-kazuend-unsplash-cut.jpg',
-    portrait =  'landpage-kazuend-unsplash-portrait.jpg'
+    landscape = 'landpage-kazuend-unsplash-cut-sub.jpg',
+    portrait = 'landpage-kazuend-unsplash-portrait-sub.jpg'
 }
 
 @Component({

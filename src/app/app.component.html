@@ -1,7 +1,9 @@
 <div class="app">
 
-    <mat-toolbar color="primary" class="app--toolbar">
-        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <mat-toolbar class="app--toolbar" color="primary">
+        <button (click)="snav.toggle()" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
         <h1 class="app--toolbar--name">{{title}}</h1>
     </mat-toolbar>
 
@@ -9,10 +11,10 @@
         <mat-sidenav #snav [mode]="'over'">
             <mat-nav-list>
                 <a
+                    (click)="snav.toggle()"
+                    *ngFor="let nav of fillerNav"
                     mat-list-item
                     routerLink="{{nav.url}}"
-                    *ngFor="let nav of fillerNav"
-                    (click)="snav.toggle()"
                 >
                     {{nav.text}}
                 </a>

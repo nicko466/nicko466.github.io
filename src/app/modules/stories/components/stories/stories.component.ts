@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Hanzi} from '../../../../shared/models/hanzi';
 import {RepoService} from '../../../../../services/repo.service';
 import {ApiHsk} from '../../../../shared/models/dto/hsk/hsk';
@@ -12,18 +12,17 @@ export interface WordsFound {
 }
 
 @Component({
-  selector: 'app-stories',
-  templateUrl: './stories.component.html',
-  styleUrls: ['./stories.component.scss']
+    selector: 'app-stories',
+    templateUrl: './stories.component.html',
+    styleUrls: ['./stories.component.scss']
 })
 export class StoriesComponent implements OnInit {
 
-    private text: string;
     public words: string[];
     public hanzi: Hanzi[];
     public indexToHighlight: number[] = [];
-
     public tooltipText: string;
+    private text: string;
 
     constructor(private repoService: RepoService) {
     }
@@ -52,7 +51,7 @@ export class StoriesComponent implements OnInit {
     }
 
 
-    private getUniqueElement(wordIndex: number , wordMaxSize: number): string {
+    private getUniqueElement(wordIndex: number, wordMaxSize: number): string {
         // get words that contains the word
         const wordsCandidate: Hanzi[] = this.hanzi
             .filter((wordEl: Hanzi) => wordEl.simplified.includes(this.words[wordIndex]));
@@ -102,7 +101,7 @@ export class StoriesComponent implements OnInit {
         if (hanzis.length > 0) {
             wordFound.hanzis = hanzis;
             wordFound.indexes =
-                Array.from({length: wordPosition  + 1 - minusIndex}, (v, k) => k + minusIndex);
+                Array.from({length: wordPosition + 1 - minusIndex}, (v, k) => k + minusIndex);
 
             return wordFound;
         }
@@ -160,13 +159,13 @@ export class StoriesComponent implements OnInit {
 
     private formatHanzis(hanzis: Hanzi[]): string {
         if (hanzis.length === 0) {
-            return new Hanzi('NA', 'NA' , 'NA', []).toString();
+            return new Hanzi('NA', 'NA', 'NA', []).toString();
         }
         const hanzi: Hanzi = hanzis[0];
 
         // if it contains multiple hanzi it must be due to same simplified hanzi
         if (hanzis.length > 1) {
-            return hanzis.reduce( (accumulator: Hanzi, currentValue: Hanzi) => {
+            return hanzis.reduce((accumulator: Hanzi, currentValue: Hanzi) => {
 
                 if (!accumulator.pinyin.includes(currentValue.pinyin)) {
                     accumulator.pinyin += `/${currentValue.pinyin}`;
