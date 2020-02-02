@@ -1,24 +1,7 @@
-<div class="hsk">
+<div *ngFor="let storySummary of storiesSummary">
 
-    <div *ngFor="let word of words; index as i" class="words">
-
-        <div
-            #tooltip="matTooltip"
-            (click)="updateTooltip(i);tooltip.toggle();"
-            (mouseenter)="$event.stopImmediatePropagation()"
-            (mouseleave)="$event.stopImmediatePropagation()"
-            (mouseover)="$event.stopImmediatePropagation()"
-            [ngClass]="{highlight: indexToHighlight.includes(i)}"
-            class="words__item"
-            matTooltip="{{tooltipText}}"
-            matTooltipClass="custom-tooltip"
-            matTooltipHideDelay="1000"
-            matTooltipPosition="below"
-        >
-            {{word}}
-        </div>
-
-
-    </div>
+    <a routerLink="{{storySummary.id}}" routerLinkActive="active">
+        {{storySummary.url}}
+    </a>
 
 </div>

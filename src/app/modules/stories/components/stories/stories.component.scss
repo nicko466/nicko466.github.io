@@ -1,28 +1,3 @@
-
 :host {
-    display: flex;
-}
-
-.hsk {
-    overflow-y: auto;
-    padding: 15px;
-    font-size: 1.4em;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    justify-content: center;
-
-    .words {
-
-        &__item {
-            padding: 2px;
-        }
-
-        .highlight {
-            background-color: yellow;
-        }
-
-    }
-
+    margin: 15px;
 }
