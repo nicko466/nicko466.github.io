@@ -13,5 +13,5 @@ jobs:
       with:
         node-version: '10.x'
     - run: npm install
-    - run: npm install -g @angular/cli > /dev/null
-    - run: ng deploy
+    - run: npm install -g @angular/cli
+    - run: ng deploy --no-silent
