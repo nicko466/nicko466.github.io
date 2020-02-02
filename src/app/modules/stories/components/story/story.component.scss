@@ -3,24 +3,43 @@
     display: flex;
 }
 
-.hsk {
+.story {
+
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
     padding: 15px;
-    font-size: 1.4em;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
 
-    justify-content: center;
+    &--header {
 
-    .words {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        justify-content: space-between;
 
-        &__item {
-            padding: 2px;
+        h1 {
+            display: flex;
         }
 
-        .highlight {
-            background-color: yellow;
+    }
+
+    &--text {
+        font-size: 1.4em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        &--words {
+            cursor: pointer;
+
+            &__item {
+                padding: 2px;
+            }
+
+            .highlight {
+                background-color: yellow;
+            }
         }
 
     }

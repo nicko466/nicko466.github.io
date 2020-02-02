@@ -25,7 +25,7 @@ export class StoryComponent implements OnInit {
     public hanzi: Hanzi[];
     public indexToHighlight: number[] = [];
     public tooltipText: string;
-    private text: string;
+    public story: Story;
 
     constructor(
         private storiesService: StoriesService,
@@ -40,10 +40,9 @@ export class StoryComponent implements OnInit {
         this.storiesService.getStory(`${id}`, 4)
             .then((data: any) => {
                     const jsonConvert: JsonConvert = new JsonConvert();
-                    this.text = jsonConvert.deserializeObject(data, Story).text;
+                    this.story = jsonConvert.deserializeObject(data, Story);
 
-                    this.words = this.text.match(/./g);
-                    console.error(this.text);
+                    this.words = this.story.text.match(/./g);
                 },
                 (error) => console.error(`Failed to get data due to ${error} `)
             );

@@ -1,24 +1,33 @@
-<div class="hsk">
+<div class="story">
 
-    <div *ngFor="let word of words; index as i" class="words">
+    <div *ngIf="story != null" class="story--header">
 
-        <div
-            #tooltip="matTooltip"
-            (click)="updateTooltip(i);tooltip.toggle();"
-            (mouseenter)="$event.stopImmediatePropagation()"
-            (mouseleave)="$event.stopImmediatePropagation()"
-            (mouseover)="$event.stopImmediatePropagation()"
-            [ngClass]="{highlight: indexToHighlight.includes(i)}"
-            class="words__item"
-            matTooltip="{{tooltipText}}"
-            matTooltipClass="custom-tooltip"
-            matTooltipHideDelay="1000"
-            matTooltipPosition="below"
-        >
-            {{word}}
-        </div>
+        <h1>{{story.title}}</h1>
 
+        <img [src]="story.imageUrl" width="100px"/>
 
     </div>
+
+    <div class="story--text">
+        <div *ngFor="let word of words; index as i" class="story--text--words">
+            <div
+                #tooltip="matTooltip"
+                (click)="updateTooltip(i);tooltip.toggle();"
+                (mouseenter)="$event.stopImmediatePropagation()"
+                (mouseleave)="$event.stopImmediatePropagation()"
+                (mouseover)="$event.stopImmediatePropagation()"
+                [ngClass]="{highlight: indexToHighlight.includes(i)}"
+                class="story--text--words__item"
+                matTooltip="{{tooltipText}}"
+                matTooltipClass="custom-tooltip"
+                matTooltipHideDelay="1000"
+                matTooltipPosition="below"
+            >
+                {{word}}
+            </div>
+        </div>
+    </div>
+
+
 
 </div>

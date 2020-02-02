@@ -1,7 +1,12 @@
 {
-    "stories" : [
-    {
-        "id": 1,
-        "title" : "Little hedgehog's new hairstyle 小刺猬的新发型"
-    }
-]}
+    "stories": [
+        {
+            "id": 1,
+            "title": "Little hedgehog's new hairstyle 小刺猬的新发型"
+        },
+        {
+            "id": 2,
+            "title": "The most intelligent birds 鸟中诸葛"
+        }
+    ]
+}
