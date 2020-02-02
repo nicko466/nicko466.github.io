@@ -12,11 +12,11 @@ export interface WordsFound {
 }
 
 @Component({
-    selector: 'app-stories',
-    templateUrl: './stories.component.html',
-    styleUrls: ['./stories.component.scss']
+    selector: 'app-story',
+    templateUrl: './story.component.html',
+    styleUrls: ['./story.component.scss']
 })
-export class StoriesComponent implements OnInit {
+export class StoryComponent implements OnInit {
 
     public words: string[];
     public hanzi: Hanzi[];

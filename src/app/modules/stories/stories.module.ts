@@ -1,6 +1,5 @@
 import {Injectable, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {StoriesComponent} from './components/stories/stories.component';
 import {StoriesRoutingModule} from './stories-routing.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
@@ -8,6 +7,7 @@ import 'hammerjs';
 
 import {HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
 import {HammerInstance} from '@angular/material/core';
+import {StoryComponent} from './components/story/story.component';
 
 declare var Hammer: any;
 
@@ -21,7 +21,7 @@ export class MyHammerConfig extends HammerGestureConfig {
 }
 
 @NgModule({
-    declarations: [StoriesComponent],
+    declarations: [StoryComponent],
     imports: [
         MatTooltipModule,
         CommonModule,
