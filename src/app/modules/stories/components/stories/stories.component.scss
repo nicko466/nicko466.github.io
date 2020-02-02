@@ -1,7 +1,11 @@
 
+:host {
+    display: flex;
+}
+
 .hsk {
-    touch-action: pan-y !important;
-    margin: 15px;
+    overflow-y: auto;
+    padding: 15px;
     font-size: 1.4em;
     display: flex;
     flex-direction: row;
@@ -15,7 +19,7 @@
             padding: 2px;
         }
 
-        .higlight {
+        .highlight {
             background-color: yellow;
         }
 
