@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import { NgModule, Injectable } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -8,11 +8,11 @@ import {RepoService} from '../services/repo.service';
 import {HttpClientModule} from '@angular/common/http';
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import {SongsComponent} from './shared/components/songs/songs.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -34,7 +34,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         MatListModule,
     ],
     providers: [
-        RepoService
+        RepoService,
     ],
     bootstrap: [AppComponent]
 })
