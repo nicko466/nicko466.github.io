@@ -22,7 +22,7 @@ export class SongsComponent implements OnInit {
             .getSong('songs')
             .subscribe(
                 (data: any) => {
-                    let jsonConvert: JsonConvert = new JsonConvert();
+                    const jsonConvert: JsonConvert = new JsonConvert();
                     this.songs = jsonConvert.deserializeObject(data, ApiSongs);
 
                     console.error(this.songs);
