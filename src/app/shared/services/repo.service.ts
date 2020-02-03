@@ -15,9 +15,4 @@ export class RepoService {
     public getHSK(level: string): Promise<any> {
         return this.httpClient.get(`./assets/hsk/hsk-level-${level}.json`).toPromise();
     }
-
-    public getCedictDico(): Promise<any> {
-        return this.httpClient.get(`./assets/cedict/cedict.json`).toPromise();
-    }
-
 }
