@@ -1,4 +1,4 @@
-import './dto/song/apiLang';
+import '../dto/song/apiLang';
 
 export class Lyric {
 

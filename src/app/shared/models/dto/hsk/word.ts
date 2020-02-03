@@ -1,5 +1,5 @@
 import {JsonObject, JsonProperty} from 'json2typescript';
-import {Hanzi} from '../../hanzi';
+import {Hanzi} from '../../classes/hanzi';
 
 @JsonObject('word')
 export class ApiWord {

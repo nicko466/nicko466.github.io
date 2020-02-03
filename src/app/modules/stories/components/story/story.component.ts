@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Hanzi} from '../../../../shared/models/hanzi';
+import {Hanzi} from '../../../../shared/models/classes/hanzi';
 import {RepoService} from '../../../../../services/repo.service';
 import {ApiHsk} from '../../../../shared/models/dto/hsk/hsk';
 import {JsonConvert} from 'json2typescript';
