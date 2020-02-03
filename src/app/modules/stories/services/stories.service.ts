@@ -53,25 +53,12 @@ export class StoriesService {
         const maxIndex = wordPosition + wordSize > words.length ?
             words.length : wordPosition + wordSize;
 
-        let hanzis: Hanzi[] = this.getWord(words, wordPosition, maxIndex, wordsCandidate);
+        const hanzis: Hanzi[] = this.getWord(words, wordPosition, maxIndex, wordsCandidate);
 
         if (hanzis.length > 0) {
             wordFound.hanzis = hanzis;
             wordFound.indexes =
                 Array.from({length: maxIndex - wordPosition}, (v, k) => k + wordPosition);
-
-            return wordFound;
-        }
-
-        const minusIndex = wordSize - wordPosition > 0 || words.length < wordSize ?
-            0 : wordPosition - wordSize;
-
-        hanzis = this.getWord(words, minusIndex, wordPosition + 1, wordsCandidate);
-
-        if (hanzis.length > 0) {
-            wordFound.hanzis = hanzis;
-            wordFound.indexes =
-                Array.from({length: wordPosition + 1 - minusIndex}, (v, k) => k + minusIndex);
 
             return wordFound;
         }
