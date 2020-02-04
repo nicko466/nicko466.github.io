@@ -5,10 +5,16 @@ import {JsonConvert} from 'json2typescript';
 import {ActivatedRoute} from '@angular/router';
 import {StoriesService} from '../../services/stories.service';
 import {Story} from '../../../../shared/models/dto/stories/story';
+import {MatSnackBar} from '@angular/material';
 
 export interface HanzisTooltip {
     hanzis: Hanzi[];
     indexes: number[];
+}
+
+export enum MessageDictLoad {
+    success = 'Succeed to initialize chinese dictionary, click on a chinese character to display infos',
+    error = 'Failed to initialize chinese dictionary'
 }
 
 @Component({
@@ -25,6 +31,7 @@ export class StoryComponent implements OnInit {
     public story: Story;
 
     constructor(
+        private snackBar: MatSnackBar,
         private storiesService: StoriesService,
         private repoService: RepoService,
         private route: ActivatedRoute
@@ -45,7 +52,12 @@ export class StoryComponent implements OnInit {
             );
 
         this.storiesService.initCedict()
-            .then((hanzis: Hanzi[]) => this.hanzi = hanzis);
+            .then((hanzis: Hanzi[]) => {
+                this.hanzi = hanzis;
+                this.displaySnackBar(MessageDictLoad.success);
+            }).catch(reason =>
+                this.displaySnackBar(MessageDictLoad.error)
+        );
     }
 
     public updateTooltip(wordIndex: number) {
@@ -55,5 +67,8 @@ export class StoryComponent implements OnInit {
     }
 
 
+    private displaySnackBar(message: MessageDictLoad) {
+        this.snackBar.open(message, 'Close', { duration : 3000});
+    }
 }
 

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Cedict} from '../../../shared/models/dto/cedict/cedict';
-import {CedictWord} from '../../../shared/models/dto/cedict/cedict-word';
 import {JsonConvert} from 'json2typescript';
 import {Hanzi} from '../../../shared/models/classes/hanzi';
 import {HanzisTooltip} from '../components/story/story.component';
@@ -9,7 +8,8 @@ import {HanzisTooltip} from '../components/story/story.component';
 @Injectable()
 export class StoriesService {
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) {
+    }
 
     public getStories(hsk: number): Promise<any> {
         return this.httpClient.get(`./assets/stories/hsk${hsk}/stories.json`).toPromise();
@@ -27,19 +27,22 @@ export class StoriesService {
         return this.getCedictDico()
             .then(
                 (data: Cedict) => {
-                    const tmp: CedictWord[] = [];
+                    let cedict: Cedict = null;
                     const jsonConvert: JsonConvert = new JsonConvert();
-                    for (const cedictWord of data.cedictWord) {
-                        tmp.push(jsonConvert.deserializeObject(cedictWord, CedictWord));
+                    try {
+                        cedict = jsonConvert.deserializeObject(data, Cedict);
+                        return cedict.cedictWord.flatMap((cedictWord) =>
+                            cedictWord.toHanzi()
+                        );
+                    } catch (error) {
+                        console.error(`Failed to deserialize cedict due to ${error}`);
+                        throw error;
                     }
-                    return tmp.flatMap((cedictWord, index) =>
-                        cedictWord.toHanzi()
-                    );
                 },
                 (error) => {
                     // TODO use interceptor to catch all http error
-                    console.error(`Failed to get data due to ${error} `);
-                    return [];
+                    console.error(`Failed to dl cedict dictionary due to ${error} `);
+                    throw error;
                 }
             );
     }

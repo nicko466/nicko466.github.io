@@ -10,6 +10,7 @@ import {HammerInstance} from '@angular/material/core';
 import {StoryComponent} from './components/story/story.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import {StoriesService} from './services/stories.service';
+import {MatSnackBar, MatSnackBarContainer, MatSnackBarModule} from '@angular/material';
 
 declare var Hammer: any;
 
@@ -28,6 +29,7 @@ export class MyHammerConfig extends HammerGestureConfig {
         StoriesComponent,
     ],
     imports: [
+        MatSnackBarModule,
         MatTooltipModule,
         CommonModule,
         StoriesRoutingModule,
@@ -37,6 +39,7 @@ export class MyHammerConfig extends HammerGestureConfig {
             provide: HAMMER_GESTURE_CONFIG,
             useClass: MyHammerConfig
         },
+        MatSnackBar,
         StoriesService,
     ]
 })
