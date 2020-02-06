@@ -16,7 +16,11 @@
                     mat-list-item
                     routerLink="{{nav.url}}"
                 >
-                    {{nav.text}}
+                    <div class="sidenav--item">
+                        <div class="sidenav--item--icon"><i class="material-icons">{{nav.icon}}</i></div>
+                        <div class="sidenav--item--text">{{nav.text}}</div>
+                        <div class="sidenav--item--sup"><i class="material-icons">keyboard_arrow_right</i></div>
+                    </div>
                 </a>
             </mat-nav-list>
         </mat-sidenav>

@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 export interface INavButton {
     url: string;
     text: string;
+    icon: string;
 }
 
 @Component({
@@ -17,14 +18,17 @@ export class AppComponent {
         {
             url: '/',
             text: 'Home',
+            icon: 'house',
         },
         {
             url: 'stories',
             text: 'Hsk stories',
+            icon: 'book',
         },
         {
             url: 'songs/songs5',
             text: 'Lyrics 5',
+            icon: 'speaker',
         },
     ];
 
