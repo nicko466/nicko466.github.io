@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {GoogleAnalyticsService} from './shared/services/google-analytics.service';
 
 export interface INavButton {
     url: string;
@@ -31,5 +32,9 @@ export class AppComponent {
             icon: 'speaker',
         },
     ];
+
+    constructor(private googleAnalytics: GoogleAnalyticsService) {
+        googleAnalytics.init();
+    }
 
 }
