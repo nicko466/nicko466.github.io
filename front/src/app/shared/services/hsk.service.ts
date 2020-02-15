@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {ApiHsk} from '../models/dto/hsk/hsk';
 import {JsonConvert} from 'json2typescript';
 import {Hanzi} from '../models/classes/hanzi';
-import {HanzisTooltip} from '../../modules/stories/components/story/story.component';
 
 @Injectable()
 export class HskService {
