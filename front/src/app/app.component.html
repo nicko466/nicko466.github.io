@@ -1,0 +1,33 @@
+<div class="app">
+
+    <mat-toolbar class="app--toolbar" color="primary">
+        <button (click)="snav.toggle()" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="app--toolbar--name">{{title}}</h1>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="app--sidenav-container">
+        <mat-sidenav #snav [mode]="'over'">
+            <mat-nav-list>
+                <a
+                    (click)="snav.toggle()"
+                    *ngFor="let nav of fillerNav"
+                    mat-list-item
+                    routerLink="{{nav.url}}"
+                >
+                    <div class="sidenav--item">
+                        <div class="sidenav--item--icon"><i class="material-icons">{{nav.icon}}</i></div>
+                        <div class="sidenav--item--text">{{nav.text}}</div>
+                        <div class="sidenav--item--sup"><i class="material-icons">keyboard_arrow_right</i></div>
+                    </div>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+</div>

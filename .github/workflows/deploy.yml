@@ -1,6 +1,9 @@
 name: Deploy
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -12,10 +15,12 @@ jobs:
     - uses: actions/setup-node@v1 #this installs node and npm for us
       with:
         node-version: '10.x'
-    - run: npm install
-    - run: npm run lint
-    - run: npm install -g @angular/cli
-    - run: ng deploy --no-silent --repo=https://github.com/nicko466/myplayground.git --name="nicko446" --email=nicko466@gmail.com
+    - run: |
+        cd front
+        npm install
+        npm run lint
+        npm install -g @angular/cli
+        ng deploy --no-silent --repo=https://github.com/nicko466/myplayground.git --name="nicko446" --email=nicko466@gmail.com
       env:
         CI: true
         GH_TOKEN: ${{ secrets.GH_TOKEN }}

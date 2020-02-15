@@ -1,0 +1,62 @@
+@import "src/styles.scss";
+
+.app {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $app-color-grey;
+
+    .mat-sidenav-content {
+        display: flex;
+    }
+
+    &--sidenav-container {
+        height: 100%;
+    }
+
+    .mat-nav-list {
+        padding-top: 0;
+    }
+
+    .mat-list-item {
+
+        &:hover {
+            background-color: $app-color-grey;
+        }
+
+        .sidenav--item {
+            // /!\ sidebar do not manage responsive see docs
+            width: 200px;
+            display: flex;
+            padding-left: 10px;
+            align-items: center;
+
+            &--text {
+                margin-left: 15px;
+            }
+
+            &--sup {
+                margin-right: 0;
+                margin-left: auto;
+
+                i {
+                    padding-top: 4px;
+                }
+            }
+        }
+
+    }
+
+    &--toolbar {
+        display: flex;
+
+        &--name {
+            margin-left: 8px;
+        }
+    }
+
+}
