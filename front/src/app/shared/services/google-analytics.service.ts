@@ -1,21 +1,22 @@
 import {Injectable} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
-declare var gtag: Function;
+declare var gtag;
 
 @Injectable({
     providedIn: 'root'
 })
 export class GoogleAnalyticsService {
 
-    constructor(private router: Router) {}
+    constructor(private router: Router) {
+    }
 
     public event(eventName: string, params: {}) {
         gtag('event', eventName, params);
     }
 
-    public init(){
+    public init() {
         this.initTagManager();
         this.initAnalytics();
     }
@@ -31,7 +32,7 @@ export class GoogleAnalyticsService {
       ga('create', '${environment.googleAnalyticsKey}', 'auto'); `;
             document.head.appendChild(script);
         } catch (ex) {
-            console.error("Error appending google analytics");
+            console.error('Error appending google analytics');
             console.error(ex);
         }
     }
@@ -55,7 +56,7 @@ export class GoogleAnalyticsService {
             `;
             document.head.appendChild(script2);
         } catch (ex) {
-            console.error("Error appending google tag manager");
+            console.error('Error appending google tag manager');
             console.error(ex);
         }
     }
@@ -64,7 +65,7 @@ export class GoogleAnalyticsService {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 gtag('config', environment.googleAnalyticsKey, {
-                    'page_path': event.urlAfterRedirects,
+                    page_path: event.urlAfterRedirects,
                 });
             }
         });
