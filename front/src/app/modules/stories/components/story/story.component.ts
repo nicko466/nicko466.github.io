@@ -5,7 +5,7 @@ import {JsonConvert} from 'json2typescript';
 import {ActivatedRoute} from '@angular/router';
 import {StoriesService} from '../../services/stories.service';
 import {Story} from '../../../../shared/models/dto/stories/story';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface HanzisTooltip {
     hanzis: Hanzi[];

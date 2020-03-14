@@ -10,7 +10,7 @@ import {HammerInstance} from '@angular/material/core';
 import {StoryComponent} from './components/story/story.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import {StoriesService} from './services/stories.service';
-import {MatSnackBar, MatSnackBarContainer, MatSnackBarModule} from '@angular/material';
+import { MatSnackBar, MatSnackBarContainer, MatSnackBarModule } from '@angular/material/snack-bar';
 
 declare var Hammer: any;
 
