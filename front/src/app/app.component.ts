@@ -31,6 +31,11 @@ export class AppComponent {
             text: 'Lyrics 5',
             icon: 'speaker',
         },
+        {
+            url: 'trading',
+            text: 'Trading',
+            icon: 'bar_chart',
+        },
     ];
 
     constructor(private googleAnalytics: GoogleAnalyticsService) {

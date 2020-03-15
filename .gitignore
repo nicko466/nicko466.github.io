@@ -9,6 +9,7 @@ tmp
 
 # dependencies
 node_modules
+front/src/environments/environment.ts
 
 # profiling files
 chrome-profiler-events.json

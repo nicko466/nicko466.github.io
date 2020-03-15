@@ -13,6 +13,10 @@ const routes: Routes = [
         path: 'stories',
         loadChildren: () => import('./modules/stories/stories.module').then(m => m.StoriesModule),
     },
+    {
+        path: 'trading',
+        loadChildren: () => import('./modules/trading/trading.module').then(m => m.TradingModule),
+    },
     {path: 'songs', component: SongsComponent},
     {path: 'songs/:id', component: SongComponent},
     {path: '**', component: PageNotFoundComponent}
