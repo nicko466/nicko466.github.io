@@ -22,6 +22,7 @@ export class CovidapiService {
     public map(countries: any): CountryStat[] {
         const countriesStat: CountryStat[] = [];
 
+        // tslint:disable-next-line:forin
         for (const countryName in countries) {
             const covidStats: any[] = countries[countryName];
             const data: CovidStat[] = covidStats.map(covidStat => {
