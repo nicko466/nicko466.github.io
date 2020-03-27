@@ -31,6 +31,11 @@ export class AppComponent {
             text: 'Lyrics 5',
             icon: 'speaker',
         },
+        {
+            url: 'covid19',
+            text: 'Covid19',
+            icon: 'bar_chart',
+        },
     ];
 
     constructor(private googleAnalytics: GoogleAnalyticsService) {

@@ -4,7 +4,13 @@
 
 export const environment = {
     googleAnalyticsKey: 'UA-71272114-1',
-    production: false
+    production: false,
+    kraken: {
+        wsauth: 'wss://ws-auth.kraken.com',
+        ws: 'wss://ws.kraken.com',
+        wsSand: 'ws://ws-sandbox.kraken.com',
+        token: 'Srt0SVxeRiWLRxAQu2oxPoyhsbVF+zoglik6/+pzklfCYNLox2HAEr4Y',
+    }
 };
 
 /*
