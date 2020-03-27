@@ -1,7 +1,11 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {NextObserver, Observable, Subject} from 'rxjs';
+import { NextObserver, Observable, Subject} from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
+import {Spread} from '../objects/spread';
+
+import { filter, map } from 'rxjs/operators';
+
 
 export interface IAuthent {
     event: string;
@@ -35,6 +39,14 @@ export class KrakenService {
         return this.subject.next(message);
     }
 
+    public getSpread(): Observable<Spread> {
+        return this.subject.pipe(
+            filter((data: any) => data[2] === 'spread'),
+            map((spreadData) => new Spread(spreadData[1])),
+            // map((spread: Spread) => spread.getProfit(1.26)),
+        );
+    }
+
     public authent(token) {
         const authent: IAuthent = {
             event: 'subscribe',
@@ -48,13 +60,6 @@ export class KrakenService {
 
     private create(url: string): Subject<any> {
         const subject = webSocket(url);
-
-        subject.subscribe(
-            msg => console.log(msg), // Called whenever there is a message from the server.
-            err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-            () => console.log('complete') // Called when connection is closed (for whatever reason).
-        );
-
         return subject;
     }
 }

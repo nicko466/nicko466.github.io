@@ -1,4 +1,26 @@
 
-<p> App it works</p>
+<div>
+    <h4>
+        Spread value profit :
+    </h4>
+    <span>
+        {{profit}}
+    </span>
+</div>
+<div>
+    <span>
+        My Wallet :
+    </span>
+    <span>
+        {{myWallet}}
+    </span>
+</div>
+
+<div>
+    Latence send + execute order ( {{latency}} s)
+</div>
+
+<div id="chartdiv"></div>
+
 <button (click)="sendPing()">Ping test</button>
-<button (click)="displayXBTEUR()">display XBT EUR</button>
+<button (click)="displayXBTEURSpread()">display XBT EUR Spread</button>
