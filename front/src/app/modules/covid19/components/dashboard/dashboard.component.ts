@@ -56,8 +56,8 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     public ngAfterViewInit(): void {
         this.zone.runOutsideAngular(() => {
             this.chartDeath = this.initChart('deaths');
-            this.chartConfirm = this.initChart('recovered');
-            this.chartRecov = this.initChart('confirmed');
+            this.chartConfirm = this.initChart('confirmed');
+            this.chartRecov = this.initChart('recovered');
             this.updateCharts();
         });
     }
