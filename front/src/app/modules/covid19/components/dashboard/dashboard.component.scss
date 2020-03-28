@@ -1,14 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+
+    &--filter {
+
+    }
+
+    &--charts {
+
+    }
+
+}
+
+
 #deaths {
-  height: 500px;
-  width: 500px;
+    height: 500px;
+    width: 500px;
 }
 
 #confirmed {
-  height: 500px;
-  width: 500px;
+    height: 500px;
+    width: 500px;
 }
 
 #recovered {
-  height: 500px;
-  width: 500px;
+    height: 500px;
+    width: 500px;
 }

@@ -1,7 +1,52 @@
 
-<div id="deaths"></div>
+<div class="container">
 
-<div id="recovered"></div>
+    <div class="container--filter">
 
-<div id="confirmed"></div>
+        <form>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="Select a Country"
+                       aria-label="Country"
+                       matInput
+                       [formControl]="myControl"
+                       (keyup.enter)="addCountry()"
+                       [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let country of countriesFiltered | async" [value]="country">
+                        {{country}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+
+        <div *ngFor="let country of countriesSelected">
+            {{country}}
+        </div>
+
+<!--        <mat-form-field>-->
+<!--            <mat-chip-list #chipList *ngFor="let country of countriesSelected">-->
+<!--                <mat-chip>{{country}}</mat-chip>-->
+<!--            </mat-chip-list>-->
+<!--            <input [matChipInputFor]="countriesFiltered">-->
+<!--        </mat-form-field>-->
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="container--charts">
+
+        <div id="deaths"></div>
+
+        <div id="recovered"></div>
+
+        <div id="confirmed"></div>
+
+    </div>
+
+</div>
+
+
+
 

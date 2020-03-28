@@ -1,10 +1,14 @@
-import { NgZone, Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
+import { NgZone, Component, OnInit, AfterViewInit, OnDestroy, OnChanges} from '@angular/core';
 import {CovidapiService} from '../../services/covidapi.service';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import {ChartData, CountryStat, CovidStat} from '../../models/covidapi';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import {DashboardService} from '../../services/dashboard.service';
 
 am4core.useTheme(am4themes_animated);
 
@@ -13,15 +17,21 @@ am4core.useTheme(am4themes_animated);
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy  {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public countryStats: CountryStat[];
     private chartRecov: am4charts.XYChart;
     private chartDeath: am4charts.XYChart;
     private chartConfirm: am4charts.XYChart;
 
+    public myControl = new FormControl();
+    public countriesSelected: string[] = ["France", "China"];
+    public countries: string[] = [];
+    public countriesFiltered: Observable<string[]>;
+
     constructor(
         private zone: NgZone,
+        private readonly dashboardService: DashboardService,
         private readonly covidapiService: CovidapiService) {
     }
 
@@ -44,42 +54,29 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy  {
             this.chartDeath = this.initChart('deaths');
             this.chartConfirm = this.initChart('recovered');
             this.chartRecov = this.initChart('confirmed');
+            this.updateCharts();
         });
     }
 
     public ngOnInit(): void {
+        this.countriesFiltered = this.myControl.valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this.filterCountry(value))
+            );
+
         this.covidapiService.getData()
             .subscribe((data: any) => {
                 this.countryStats = data;
-
-                this.countryStats
-                    .forEach((countryStat: CountryStat) => {
-                        this.initSeries(
-                            'recovered',
-                            countryStat.countryName,
-                            this.chartRecov,
-                            countryStat.data.map((stat) => ({date: stat.date, value: stat.recovered})));
-                    });
-
-                this.countryStats
-                    .forEach((countryStat: CountryStat) => {
-                        this.initSeries(
-                            'deaths',
-                            countryStat.countryName,
-                            this.chartDeath,
-                            countryStat.data.map((stat) => ({date: stat.date, value: stat.deaths})));
-                    });
-
-                this.countryStats
-                    .forEach((countryStat: CountryStat) => {
-                        this.initSeries(
-                            'confirmed',
-                            countryStat.countryName,
-                            this.chartConfirm,
-                            countryStat.data.map((stat) => ({date: stat.date, value: stat.confirmed})));
-                    });
-
+                this.countries = this.countryStats.map((countryStat: CountryStat) => countryStat.countryName);
+                this.updateCharts();
             });
+    }
+
+    private filterCountry(value: string) {
+        const valueToFilter = value?.toLowerCase();
+
+        return this.countries.filter((country) => country.toLowerCase().includes(valueToFilter));
     }
 
     private initSeries(info: string, country: string, chart: any, chartData: ChartData[]) {
@@ -120,4 +117,44 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy  {
         return chart;
     }
 
+    addCountry() {
+        if (!this.countriesSelected.includes(this.myControl.value)) {
+            this.countriesSelected.push(this.myControl.value);
+            this.updateCharts();
+        }
+    }
+
+    private updateCharts() {
+        const filterCountryStats = this.dashboardService.getFilteredCountryStats(this.countriesSelected, this.countryStats);
+
+        this.chartRecov.data = [];
+        filterCountryStats
+            .forEach((countryStat: CountryStat) => {
+                this.initSeries(
+                    'recovered',
+                    countryStat.countryName,
+                    this.chartRecov,
+                    countryStat.data.map((stat) => ({date: stat.date, value: stat.recovered})));
+            });
+
+        this.chartDeath.data = [];
+        filterCountryStats
+            .forEach((countryStat: CountryStat) => {
+                this.initSeries(
+                    'deaths',
+                    countryStat.countryName,
+                    this.chartDeath,
+                    countryStat.data.map((stat) => ({date: stat.date, value: stat.deaths})));
+            });
+
+        this.chartConfirm.data = [];
+        filterCountryStats
+            .forEach((countryStat: CountryStat) => {
+                this.initSeries(
+                    'confirmed',
+                    countryStat.countryName,
+                    this.chartConfirm,
+                    countryStat.data.map((stat) => ({date: stat.date, value: stat.confirmed})));
+            });
+    }
 }
