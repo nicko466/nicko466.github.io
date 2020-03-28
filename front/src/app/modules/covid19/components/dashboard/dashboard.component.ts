@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private initChart(charHtmlName: string): any {
         const chart = am4core.create(charHtmlName, am4charts.XYChart);
 
-        chart.paddingRight = 20;
+        chart.paddingRight = 0;
         chart.data = [];
 
         const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
