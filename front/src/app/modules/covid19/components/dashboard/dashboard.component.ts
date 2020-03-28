@@ -21,9 +21,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public countryStats: CountryStat[] = [];
     private chartRecov: am4charts.XYChart;
-    public chartDeathsHide: boolean = false;
-    public chartRecoveredHide: boolean = true;
-    public chartConfirmedHide: boolean = true;
+    public chartDeathsHide = false;
+    public chartRecoveredHide = true;
+    public chartConfirmedHide = true;
     private chartDeath: am4charts.XYChart;
     private chartConfirm: am4charts.XYChart;
 
