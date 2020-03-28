@@ -2,9 +2,8 @@ import {AfterViewInit, Component, NgZone, OnDestroy, OnInit} from '@angular/core
 import {CovidapiService} from '../../services/covidapi.service';
 
 import * as am4core from '@amcharts/amcharts4/core';
-import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import {ChartData, CountryStat} from '../../models/covidapi';
+import {CountryStat} from '../../models/covidapi';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -41,8 +40,8 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.charts = [
             new Chart('deaths', StatType.DEATH, true),
-            new Chart('confirmed', StatType.CONFIRMED, false),
             new Chart('recovered', StatType.RECOVERED, false),
+            new Chart('confirmed', StatType.CONFIRMED, false),
         ];
     }
 
@@ -104,7 +103,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     removeCountry(countryName: string) {
-        this.countriesSelected  =
+        this.countriesSelected =
             this.countriesSelected.filter((countryCurrent) => countryCurrent !== countryName);
         this.updateCharts();
     }

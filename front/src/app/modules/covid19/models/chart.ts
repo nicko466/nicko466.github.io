@@ -48,13 +48,32 @@ export class Chart {
     }
 
     public extractStat(covdistat: CovidStat[]): ChartData[] {
+        const floor = 20;
+        let floorStat: CovidStat;
+
+        // TODO improved here dirty code
         switch (this.type) {
             case StatType.CONFIRMED:
-                return covdistat.map((stat) => ({date: stat.date, value: stat.confirmed}));
+                floorStat = covdistat.find((stat) => stat.confirmed >= floor);
+
+                return covdistat
+                    .filter((stat) => (stat.date.getTime() >= floorStat?.date?.getTime()))
+                    .map((stat) => ({date: stat.date, value: stat.confirmed}));
             case StatType.DEATH:
-                return covdistat.map((stat) => ({date: stat.date, value: stat.deaths}));
+                floorStat = covdistat.find((stat) => stat.deaths >= floor);
+
+                return covdistat
+                    .filter((stat) => (stat.date.getTime() >= floorStat?.date?.getTime()))
+                    .map((stat) => ({date: stat.date, value: stat.deaths}));
             case StatType.RECOVERED:
-                return covdistat.map((stat) => ({date: stat.date, value: stat.recovered}));
+                floorStat = covdistat.find((stat) => stat.recovered >= floor);
+
+                console.error(floorStat.date);
+                console.error(floorStat.recovered);
+
+                return covdistat
+                    .filter((stat) => (stat.date.getTime() >= floorStat?.date?.getTime()))
+                    .map((stat) => ({date: stat.date, value: stat.recovered}));
         }
     }
 
