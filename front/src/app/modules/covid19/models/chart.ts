@@ -68,9 +68,6 @@ export class Chart {
             case StatType.RECOVERED:
                 floorStat = covdistat.find((stat) => stat.recovered >= floor);
 
-                console.error(floorStat.date);
-                console.error(floorStat.recovered);
-
                 return covdistat
                     .filter((stat) => (stat.date.getTime() >= floorStat?.date?.getTime()))
                     .map((stat) => ({date: stat.date, value: stat.recovered}));
