@@ -35,18 +35,20 @@
 
     <mat-divider></mat-divider>
 
-    <div [hidden]="false" id="recovered" #recovered></div>
-    <div [hidden]="false" id="confirmed" #confirmed></div>
-    <div [hidden]="false" id="deaths" #confirmed></div>
 
-<!--    <mat-tab-group>-->
-<!--        <mat-tab label="Deaths">  <div id="deaths"></div> </mat-tab>-->
-<!--        <mat-tab label="Recovered">  <ng-template recovered></ng-template> </mat-tab>-->
-<!--        <mat-tab label="Confirmed"> <ng-template confirmed></ng-template> </mat-tab>-->
-<!--    </mat-tab-group>-->
+    <mat-tab-group (selectedTabChange)="changeTab($event)">
+        <mat-tab label="Deaths" deaths> <ng-template deaths></ng-template>  </mat-tab>
+        <mat-tab label="Recovered">  <ng-template recovered></ng-template> </mat-tab>
+        <mat-tab label="Confirmed"> <ng-template confirmed></ng-template> </mat-tab>
+    </mat-tab-group>
 
 </div>
 
+<div >
+    <div [hidden]="chartDeathsHide" id="deaths" #deaths></div>
+    <div [hidden]="chartRecoveredHide" id="recovered" #recovered></div>
+    <div [hidden]="chartConfirmedHide" id="confirmed" #confirmed></div>
+</div>
 
 
 

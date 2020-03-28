@@ -21,8 +21,12 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public countryStats: CountryStat[] = [];
     private chartRecov: am4charts.XYChart;
+    public chartDeathsHide: boolean = false;
+    public chartRecoveredHide: boolean = true;
+    public chartConfirmedHide: boolean = true;
     private chartDeath: am4charts.XYChart;
     private chartConfirm: am4charts.XYChart;
+
 
     public myControl = new FormControl();
     public countriesSelected: string[] = ['France', 'China'];
@@ -156,5 +160,24 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.chartConfirm,
                     countryStat.data.map((stat) => ({date: stat.date, value: stat.confirmed})));
             });
+    }
+
+    changeTab(event: any) {
+        this.chartDeathsHide = true;
+        this.chartRecoveredHide = true;
+        this.chartConfirmedHide = true;
+
+        switch (event.index) {
+            case 0:
+                this.chartDeathsHide = false;
+                break;
+            case 1:
+                this.chartRecoveredHide = false;
+                break;
+            case 2:
+                this.chartConfirmedHide = false;
+                break;
+        }
+
     }
 }
