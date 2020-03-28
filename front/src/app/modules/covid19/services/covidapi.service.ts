@@ -27,10 +27,10 @@ export class CovidapiService {
 
         dataHubDtos
             .forEach((dataHubDto) => {
-            let countryStat = countriesStat.find((countryStatCur) => countryStatCur.countryName === dataHubDto['Country/Region']);
+            let countryStat = countriesStat.find((countryStatCur) => countryStatCur.countryName === dataHubDto['Country']);
             if (!countryStat) {
                 countryStat = {
-                    countryName: dataHubDto['Country/Region'],
+                    countryName: dataHubDto['Country'],
                     data: [],
                 };
                 countriesStat.push(countryStat);
