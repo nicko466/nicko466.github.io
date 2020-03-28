@@ -12,6 +12,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
     bootstrap: [DashboardComponent],
@@ -20,6 +22,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         CovidapiService,
     ],
     imports: [
+        MatSlideToggleModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatDividerModule,

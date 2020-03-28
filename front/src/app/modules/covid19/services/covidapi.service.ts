@@ -16,7 +16,6 @@ export class CovidapiService {
     public getData(): Observable<CountryStat[]> {
         // https://datahub.io/core/covid-19/r/time-series-19-covid-combined.json
         // return this.http.get(`https://pomber.github.io/covid19/timeseries.json`).pipe(
-        // return this.http.get(`assets/covid/timeseries.json`).pipe(
         return this.http.get(`https://datahub.io/core/covid-19/r/countries-aggregated.json`).pipe(
                 map((data) => this.mapFromDataHub(data as DataHubDto[]))
             );
@@ -27,10 +26,10 @@ export class CovidapiService {
 
         dataHubDtos
             .forEach((dataHubDto) => {
-            let countryStat = countriesStat.find((countryStatCur) => countryStatCur.countryName === dataHubDto['Country']);
+            let countryStat = countriesStat.find((countryStatCur) => countryStatCur.countryName === dataHubDto.Country);
             if (!countryStat) {
                 countryStat = {
-                    countryName: dataHubDto['Country'],
+                    countryName: dataHubDto.Country,
                     data: [],
                 };
                 countriesStat.push(countryStat);

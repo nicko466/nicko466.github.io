@@ -2,6 +2,7 @@ import {StatType} from './stat-type.enum';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import {ChartData, CountryStat, CovidStat} from './covidapi';
+import {EvolveEnum} from './evolve.enum';
 
 export class Chart {
 
@@ -35,15 +36,18 @@ export class Chart {
         this.chart.scrollbarX = scrollbarX;
     }
 
-    public update(filterCountryStats: CountryStat[]): void {
+    public update(filterCountryStats: CountryStat[], evolution: EvolveEnum): void {
         this.chart.data = [];
         filterCountryStats
             .forEach((countryStat: CountryStat) => {
+                let extractedStat = this.extractStat(countryStat.data);
+                extractedStat = this.applyEvolve(extractedStat, evolution);
+
                 this.initSeries(
                     this.chartHtmlId,
                     countryStat.countryName,
                     this.chart,
-                    this.extractStat(countryStat.data));
+                    extractedStat);
             });
     }
 
@@ -98,5 +102,23 @@ export class Chart {
         }
     }
 
+    private applyEvolve(extractedStats: ChartData[], evolution: EvolveEnum) {
+        if (evolution.valueOf() === EvolveEnum.DAYBYDAY) {
+
+            const newData = [];
+            newData.push(extractedStats[1]);
+
+            // tslint:disable-next-line:prefer-for-of
+            for (let i = 1; i < extractedStats.length; i++) {
+                newData.push({
+                    date: extractedStats[i].date,
+                    value: extractedStats[i].value - extractedStats[i - 1].value,
+                });
+            }
+            return newData;
+        }
+
+        return extractedStats;
+    }
 }
 

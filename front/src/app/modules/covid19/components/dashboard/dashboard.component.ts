@@ -10,7 +10,8 @@ import {map, startWith} from 'rxjs/operators';
 import {DashboardService} from '../../services/dashboard.service';
 import {Chart} from '../../models/chart';
 import {StatType} from '../../models/stat-type.enum';
-import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
+import {MatExpansionPanel} from '@angular/material/expansion';
+import {EvolveEnum} from '../../models/evolve.enum';
 
 am4core.useTheme(am4themes_animated);
 
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public myControl = new FormControl();
     public countriesSelected: string[] = ['France', 'US', 'Italy'];
+    public evolution: EvolveEnum = EvolveEnum.ALL;
     public countries: string[] = [];
     public countriesFiltered: Observable<string[]>;
 
@@ -71,7 +73,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         this.covidapiService.getData()
             .subscribe((data: any) => {
                 this.countryStats = data;
-                console.log(this.countryStats);
                 this.countries = this.countryStats.map((countryStat: CountryStat) => countryStat.countryName);
                 this.updateCharts();
             });
@@ -94,7 +95,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private updateCharts() {
         const filterCountryStats = this.dashboardService.getFilteredCountryStats(this.countriesSelected, this.countryStats);
 
-        this.charts.forEach((chart) => chart.update(filterCountryStats));
+        this.charts.forEach((chart) => chart.update(filterCountryStats, this.evolution));
     }
 
     changeTab(event: any) {
@@ -111,6 +112,12 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         this.accordion.close();
         this.countriesSelected =
             this.countriesSelected.filter((countryCurrent) => countryCurrent !== countryName);
+        this.updateCharts();
+    }
+
+    public dayByDayDisplay(event: any) {
+        this.accordion.close();
+        this.evolution = event.checked ? EvolveEnum.DAYBYDAY : EvolveEnum.ALL;
         this.updateCharts();
     }
 }

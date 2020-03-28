@@ -36,6 +36,21 @@
                 </div>
 
             </mat-expansion-panel>
+
+
+            <mat-expansion-panel   #mapanel="matExpansionPanel">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Time
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Time options
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                    <mat-slide-toggle (change)="dayByDayDisplay($event)" matInput >Day by day evolution</mat-slide-toggle>
+
+            </mat-expansion-panel>
         </mat-accordion>
 
 
