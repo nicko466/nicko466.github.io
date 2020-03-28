@@ -1,14 +1,16 @@
-import { NgZone, Component, OnInit, AfterViewInit, OnDestroy, OnChanges} from '@angular/core';
+import {AfterViewInit, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {CovidapiService} from '../../services/covidapi.service';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import {ChartData, CountryStat, CovidStat} from '../../models/covidapi';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import {ChartData, CountryStat} from '../../models/covidapi';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import {DashboardService} from '../../services/dashboard.service';
+import {Chart} from '../../models/chart';
+import {StatType} from '../../models/stat-type.enum';
 
 am4core.useTheme(am4themes_animated);
 
@@ -20,44 +22,39 @@ am4core.useTheme(am4themes_animated);
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public countryStats: CountryStat[] = [];
-    private chartRecov: am4charts.XYChart;
-    public chartDeathsHide = false;
-    public chartRecoveredHide = true;
-    public chartConfirmedHide = true;
-    private chartDeath: am4charts.XYChart;
-    private chartConfirm: am4charts.XYChart;
 
+    public charts: Chart[] = [];
 
     public myControl = new FormControl();
     public countriesSelected: string[] = ['France', 'US', 'Italy'];
     public countries: string[] = [];
     public countriesFiltered: Observable<string[]>;
 
+    public statTypeDeathIndex: number = StatType.DEATH.valueOf();
+    public startTypeConfirmedIndex: number = StatType.CONFIRMED.valueOf();
+    public startTypeRecoveredIndex: number = StatType.RECOVERED.valueOf();
+
     constructor(
         private zone: NgZone,
         private readonly dashboardService: DashboardService,
         private readonly covidapiService: CovidapiService) {
+
+        this.charts = [
+            new Chart('deaths', StatType.DEATH, true),
+            new Chart('confirmed', StatType.CONFIRMED, false),
+            new Chart('recovered', StatType.RECOVERED, false),
+        ];
     }
 
     public ngOnDestroy() {
         this.zone.runOutsideAngular(() => {
-            if (this.chartRecov) {
-                this.chartRecov.dispose();
-            }
-            if (this.chartConfirm) {
-                this.chartConfirm.dispose();
-            }
-            if (this.chartDeath) {
-                this.chartDeath.dispose();
-            }
+            this.charts.forEach((chart) => chart.dispose());
         });
     }
 
     public ngAfterViewInit(): void {
         this.zone.runOutsideAngular(() => {
-            this.chartDeath = this.initChart('deaths');
-            this.chartConfirm = this.initChart('confirmed');
-            this.chartRecov = this.initChart('recovered');
+            this.charts.forEach((chart) => chart.initChart());
             this.updateCharts();
         });
     }
@@ -83,46 +80,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.countries.filter((country) => country.toLowerCase().includes(valueToFilter));
     }
 
-    private initSeries(info: string, country: string, chart: any, chartData: ChartData[]) {
-        const series = chart.series.push(new am4charts.LineSeries());
-        series.name = 'date';
-        series.dataFields.dateX = 'date';
-        series.dataFields.valueY = 'value';
-
-        series.tooltipText = info + ' in ' + country  + ' :{valueY.value}';
-        chart.cursor = new am4charts.XYCursor();
-
-        const scrollbarX = new am4charts.XYChartScrollbar();
-        scrollbarX.series.push(series);
-
-        chartData
-            .forEach((stat: ChartData) => {
-                series.data.push({ date: stat.date, name: 'name ' , value: stat.value});
-            });
-    }
-
-    private initChart(charHtmlName: string): any {
-        const chart = am4core.create(charHtmlName, am4charts.XYChart);
-
-        chart.paddingRight = 30;
-        chart.paddingLeft = 30;
-        chart.data = [];
-
-        const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-        dateAxis.renderer.grid.template.location = 0;
-
-        const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis.tooltip.disabled = true;
-        valueAxis.renderer.minWidth = 10;
-        chart.cursor = new am4charts.XYCursor();
-
-        const scrollbarX = new am4charts.XYChartScrollbar();
-        chart.scrollbarX = scrollbarX;
-
-        return chart;
-    }
-
-    addCountry() {
+    public addCountry() {
         if (!this.countriesSelected.includes(this.myControl.value)) {
             this.countriesSelected.push(this.myControl.value);
             this.updateCharts();
@@ -132,54 +90,17 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private updateCharts() {
         const filterCountryStats = this.dashboardService.getFilteredCountryStats(this.countriesSelected, this.countryStats);
 
-        this.chartRecov.data = [];
-        filterCountryStats
-            .forEach((countryStat: CountryStat) => {
-                this.initSeries(
-                    'recovered',
-                    countryStat.countryName,
-                    this.chartRecov,
-                    countryStat.data.map((stat) => ({date: stat.date, value: stat.recovered})));
-            });
-
-        this.chartDeath.data = [];
-        filterCountryStats
-            .forEach((countryStat: CountryStat) => {
-                this.initSeries(
-                    'deaths',
-                    countryStat.countryName,
-                    this.chartDeath,
-                    countryStat.data.map((stat) => ({date: stat.date, value: stat.deaths})));
-            });
-
-        this.chartConfirm.data = [];
-        filterCountryStats
-            .forEach((countryStat: CountryStat) => {
-                this.initSeries(
-                    'confirmed',
-                    countryStat.countryName,
-                    this.chartConfirm,
-                    countryStat.data.map((stat) => ({date: stat.date, value: stat.confirmed})));
-            });
+        this.charts.forEach((chart) => chart.update(filterCountryStats));
     }
 
     changeTab(event: any) {
-        this.chartDeathsHide = true;
-        this.chartRecoveredHide = true;
-        this.chartConfirmedHide = true;
+        this.charts.forEach((chart) => chart.isDisplay = false);
 
-        switch (event.index) {
-            case 0:
-                this.chartDeathsHide = false;
-                break;
-            case 1:
-                this.chartRecoveredHide = false;
-                break;
-            case 2:
-                this.chartConfirmedHide = false;
-                break;
+        const chartSelected = this.charts.find((chart) => chart.type === event.index);
+
+        if (chartSelected) {
+            chartSelected.isDisplay = true;
         }
-
     }
 
     removeCountry(countryName: string) {

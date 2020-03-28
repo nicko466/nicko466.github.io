@@ -61,9 +61,9 @@
 </div>
 
 <div>
-    <div [hidden]="chartDeathsHide" id="deaths" #deaths></div>
-    <div [hidden]="chartRecoveredHide" id="recovered" #recovered></div>
-    <div [hidden]="chartConfirmedHide" id="confirmed" #confirmed></div>
+    <div [hidden]="!charts[statTypeDeathIndex].isDisplay" id="deaths" #deaths></div>
+    <div [hidden]="!charts[startTypeRecoveredIndex].isDisplay" id="recovered" #recovered></div>
+    <div [hidden]="!charts[startTypeConfirmedIndex].isDisplay" id="confirmed" #confirmed></div>
 </div>
 
 
