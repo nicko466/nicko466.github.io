@@ -11,7 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
     bootstrap: [DashboardComponent],
@@ -20,6 +20,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
         CovidapiService,
     ],
     imports: [
+        MatProgressSpinnerModule,
         MatExpansionModule,
         MatDividerModule,
         CommonModule,

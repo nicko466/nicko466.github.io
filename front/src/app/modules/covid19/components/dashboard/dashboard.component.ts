@@ -71,6 +71,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         this.covidapiService.getData()
             .subscribe((data: any) => {
                 this.countryStats = data;
+                console.log(this.countryStats);
                 this.countries = this.countryStats.map((countryStat: CountryStat) => countryStat.countryName);
                 this.updateCharts();
             });
