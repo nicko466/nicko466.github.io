@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CovidapiService} from '../../services/covidapi.service';
 
 import * as am4core from '@amcharts/amcharts4/core';
@@ -10,6 +10,7 @@ import {map, startWith} from 'rxjs/operators';
 import {DashboardService} from '../../services/dashboard.service';
 import {Chart} from '../../models/chart';
 import {StatType} from '../../models/stat-type.enum';
+import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 
 am4core.useTheme(am4themes_animated);
 
@@ -19,6 +20,8 @@ am4core.useTheme(am4themes_animated);
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
+
+    @ViewChild('mapanel') accordion: MatExpansionPanel;
 
     public countryStats: CountryStat[] = [];
 
@@ -80,6 +83,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public addCountry() {
+        this.accordion.close();
         if (!this.countriesSelected.includes(this.myControl.value)) {
             this.countriesSelected.push(this.myControl.value);
             this.updateCharts();
@@ -103,6 +107,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     removeCountry(countryName: string) {
+        this.accordion.close();
         this.countriesSelected =
             this.countriesSelected.filter((countryCurrent) => countryCurrent !== countryName);
         this.updateCharts();
