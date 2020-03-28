@@ -19,7 +19,7 @@ am4core.useTheme(am4themes_animated);
 })
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    public countryStats: CountryStat[];
+    public countryStats: CountryStat[] = [];
     private chartRecov: am4charts.XYChart;
     private chartDeath: am4charts.XYChart;
     private chartConfirm: am4charts.XYChart;

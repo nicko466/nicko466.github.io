@@ -8,6 +8,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
     bootstrap: [DashboardComponent],
@@ -24,6 +25,7 @@ import {MatInputModule} from '@angular/material/input';
         FormsModule,
         MatAutocompleteModule,
         MatInputModule,
+        MatTabsModule,
     ]
 })
 export class Covid19Module {

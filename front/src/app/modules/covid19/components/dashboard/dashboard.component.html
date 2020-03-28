@@ -35,17 +35,18 @@
 
     <mat-divider></mat-divider>
 
-    <div class="container--charts">
+    <div [hidden]="false" id="recovered" #recovered></div>
+    <div [hidden]="false" id="confirmed" #confirmed></div>
+    <div [hidden]="false" id="deaths" #confirmed></div>
 
-        <div id="deaths"></div>
-
-        <div id="recovered"></div>
-
-        <div id="confirmed"></div>
-
-    </div>
+<!--    <mat-tab-group>-->
+<!--        <mat-tab label="Deaths">  <div id="deaths"></div> </mat-tab>-->
+<!--        <mat-tab label="Recovered">  <ng-template recovered></ng-template> </mat-tab>-->
+<!--        <mat-tab label="Confirmed"> <ng-template confirmed></ng-template> </mat-tab>-->
+<!--    </mat-tab-group>-->
 
 </div>
+
 
 
 
