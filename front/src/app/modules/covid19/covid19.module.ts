@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
     bootstrap: [DashboardComponent],
@@ -25,6 +27,7 @@ import {MatTabsModule} from '@angular/material/tabs';
         FormsModule,
         MatAutocompleteModule,
         MatInputModule,
+        MatButtonModule,
         MatTabsModule,
     ]
 })

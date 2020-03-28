@@ -180,4 +180,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         }
 
     }
+
+    removeCountry(countryName: string) {
+        this.countriesSelected  =
+            this.countriesSelected.filter((countryCurrent) => countryCurrent !== countryName);
+        this.updateCharts();
+    }
 }
