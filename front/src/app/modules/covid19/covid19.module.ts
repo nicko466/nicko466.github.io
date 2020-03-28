@@ -10,6 +10,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
         CovidapiService,
     ],
     imports: [
+        MatExpansionModule,
         MatDividerModule,
         CommonModule,
         Covid19RoutingModule,
