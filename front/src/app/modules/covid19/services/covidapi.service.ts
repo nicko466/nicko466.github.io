@@ -17,7 +17,7 @@ export class CovidapiService {
         // https://datahub.io/core/covid-19/r/time-series-19-covid-combined.json
         // return this.http.get(`https://pomber.github.io/covid19/timeseries.json`).pipe(
         // return this.http.get(`assets/covid/timeseries.json`).pipe(
-        return this.http.get(`https://datahub.io/core/covid-19/r/time-series-19-covid-combined.json`).pipe(
+        return this.http.get(`https://datahub.io/core/covid-19/r/countries-aggregated.json`).pipe(
                 map((data) => this.mapFromDataHub(data as DataHubDto[]))
             );
     }
@@ -26,7 +26,6 @@ export class CovidapiService {
         const countriesStat: CountryStat[] = [];
 
         dataHubDtos
-            .filter((dataHubDto) => dataHubDto['Province/State'] === null)
             .forEach((dataHubDto) => {
             let countryStat = countriesStat.find((countryStatCur) => countryStatCur.countryName === dataHubDto['Country/Region']);
             if (!countryStat) {
