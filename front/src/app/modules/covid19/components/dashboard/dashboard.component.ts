@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private chartConfirm: am4charts.XYChart;
 
     public myControl = new FormControl();
-    public countriesSelected: string[] = ["France", "China"];
+    public countriesSelected: string[] = ['France', 'China'];
     public countries: string[] = [];
     public countriesFiltered: Observable<string[]>;
 
