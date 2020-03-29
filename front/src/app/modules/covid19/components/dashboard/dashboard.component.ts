@@ -95,6 +95,8 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private updateCharts() {
         const filterCountryStats = this.dashboardService.getFilteredCountryStats(this.countriesSelected, this.countryStats);
 
+        this.charts.forEach((chart) => chart.dispose());
+        this.charts.forEach((chart) => chart.initChart());
         this.charts.forEach((chart) => chart.update(filterCountryStats, this.evolution));
     }
 
