@@ -23,6 +23,8 @@ export class Chart {
         this.chart.paddingRight = 50;
         this.chart.paddingLeft = 20;
         this.chart.data = [];
+        this.chart.legend = new am4charts.Legend();
+
 
         const dateAxis = this.chart.xAxes.push(new am4charts.DateAxis());
         dateAxis.renderer.grid.template.location = 0;
@@ -80,7 +82,7 @@ export class Chart {
 
     public initSeries(info: string, country: string, chart: any, chartData: ChartData[]) {
         const series = chart.series.push(new am4charts.LineSeries());
-        series.name = 'date';
+        series.name = country;
         series.dataFields.dateX = 'date';
         series.dataFields.valueY = 'value';
 
