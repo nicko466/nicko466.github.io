@@ -5,6 +5,9 @@
             <mat-icon>menu</mat-icon>
         </button>
         <h1 class="app--toolbar--name">{{title}}</h1>
+        <button class="app--toolbar--donation"  [matMenuTriggerFor]="donation" mat-icon-button>
+            <mat-icon>favorite</mat-icon>
+        </button>
     </mat-toolbar>
 
     <mat-sidenav-container class="app--sidenav-container">
@@ -31,3 +34,14 @@
     </mat-sidenav-container>
 
 </div>
+
+
+<mat-menu class="donation--tab" #donation="matMenu">
+
+    <div class="donation--tab--title">I'm a developer, buy me <mat-icon>local_cafe</mat-icon> ;)</div>
+
+    <mat-list>
+        <mat-list-item> <a href="https://paypal.me/nicko466" >Paypal</a> </mat-list-item>
+    </mat-list>
+
+</mat-menu>

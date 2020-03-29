@@ -57,6 +57,27 @@
         &--name {
             margin-left: 8px;
         }
+
+        &--donation {
+            position: absolute;
+            right: 15px;
+
+        }
+    }
+
+}
+
+.donation--tab {
+
+    &--title {
+        display: flex;
+        margin: 10px;
+        font-size: 1.2rem;
+
+        mat-icon {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
     }
 
 }

@@ -55,7 +55,7 @@ export class Chart {
         const floor = 20;
         let floorStat: CovidStat;
 
-        // TODO improved here dirty code
+        // TODO improved here dirty code use inheritance
         switch (this.type) {
             case StatType.CONFIRMED:
                 floorStat = covdistat.find((stat) => stat.confirmed >= floor);
