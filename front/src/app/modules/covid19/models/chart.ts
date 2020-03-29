@@ -94,7 +94,7 @@ export class Chart {
 
         chartData
             .forEach((stat: ChartData) => {
-                series.data.push({ date: stat.date, name: 'name ' , value: stat.value});
+                series.data.push({ date: stat.date, name: country , value: stat.value});
             });
     }
 
