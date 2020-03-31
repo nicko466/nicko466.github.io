@@ -1,4 +1,4 @@
-enum ApiLang {
+export enum ApiLang {
     Fr,
     En,
     Cn

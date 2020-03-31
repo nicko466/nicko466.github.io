@@ -1,4 +1,5 @@
 import '../dto/song/apiLang';
+import {ApiLang} from '../dto/song/apiLang';
 
 export class Lyric {
 
@@ -10,8 +11,8 @@ export class Lyric {
 
     constructor(lang: ApiLang, sentence: string, phoneWords: string) {
         this.lang = lang;
-        this.words = this.extractWords(sentence);
-        this.phoneWords = this.extractWords(phoneWords);
+        this.words = this.extractWords(sentence, false);
+        this.phoneWords = this.extractWords(phoneWords, true);
     }
 
     public getLang(): ApiLang {
@@ -32,11 +33,15 @@ export class Lyric {
         }
     }
 
-    private extractWords(sentence: string): string[] {
-        return sentence != null ?
-            sentence
-                .replace(/\s/g, '')
-                .split(',') : [];
+    private extractWords(sentence: string, isPhonetic: boolean): string[] {
+        if (sentence) {
+            // TODO fix weird testing type here
+
+            return this.lang.valueOf() === ApiLang.Cn && !isPhonetic ?
+                sentence.replace(/\s/g, '').split('') : sentence.trim().split(/[\s,]+/);
+        }
+
+        return [];
     }
 
 }

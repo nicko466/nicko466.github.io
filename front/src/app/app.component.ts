@@ -27,7 +27,7 @@ export class AppComponent {
             icon: 'book',
         },
         {
-            url: 'songs/songs5',
+            url: 'songs',
             text: 'Lyrics 5',
             icon: 'speaker',
         },

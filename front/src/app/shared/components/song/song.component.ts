@@ -4,6 +4,7 @@ import {JsonConvert} from 'json2typescript';
 import {ApiSong} from '../../models/dto/song/apiSong';
 import {Song} from '../../models/classes/song';
 import {ActivatedRoute} from '@angular/router';
+import {ApiLang} from '../../models/dto/song/apiLang';
 
 @Component({
     selector: 'app-song',

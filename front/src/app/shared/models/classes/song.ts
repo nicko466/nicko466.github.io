@@ -1,5 +1,6 @@
 import {Lyric} from './lyric';
 import {ApiSong} from '../dto/song/apiSong';
+import {ApiLang} from '../dto/song/apiLang';
 
 export class Song {
 
@@ -41,7 +42,20 @@ export class Song {
 
             for (let indexLang = 0; indexLang < numberOflang; indexLang++) {
 
-                const apiLang: ApiLang = apiSong.lyrics[indexLang].getLang();
+                const lang: string = apiSong.lyrics[indexLang].lang;
+                let apiLang: ApiLang;
+
+                switch (lang) {
+                    case 'fr':
+                        apiLang = ApiLang.Fr;
+                        break;
+                    case 'en':
+                        apiLang = ApiLang.En;
+                        break;
+                    case 'cn':
+                        apiLang = ApiLang.Cn;
+                        break;
+                }
 
                 this.langs.add(apiLang);
 
