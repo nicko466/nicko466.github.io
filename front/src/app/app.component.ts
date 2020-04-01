@@ -28,7 +28,7 @@ export class AppComponent {
         },
         {
             url: 'songs',
-            text: 'Lyrics 5',
+            text: 'Songs',
             icon: 'speaker',
         },
         {
