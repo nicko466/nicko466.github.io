@@ -5,7 +5,7 @@
             <mat-icon>menu</mat-icon>
         </button>
         <h1 class="app--toolbar--name">{{title}}</h1>
-        <button class="app--toolbar--donation"  [matMenuTriggerFor]="donation" mat-icon-button>
+        <button color="accent" class="app--toolbar--donation"  [matMenuTriggerFor]="donation" mat-mini-fab>
             <mat-icon>favorite</mat-icon>
         </button>
     </mat-toolbar>
@@ -38,7 +38,9 @@
 
 <mat-menu class="donation--tab" #donation="matMenu">
 
-    <div class="donation--tab--title">I'm a developer, buy me <mat-icon>local_cafe</mat-icon> ;)</div>
+    <div class="donation--tab--title">
+        <span>I'm a developer, buy me</span> <mat-icon>local_cafe</mat-icon><span>;)</span>
+    </div>
 
     <mat-list>
         <mat-list-item> <a href="https://paypal.me/nicko466" >Paypal</a> </mat-list-item>
